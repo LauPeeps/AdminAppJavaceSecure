@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (firebaseAuth.getCurrentUser() != null) {
-            Intent intent = new Intent(MainActivity.this, Category.class);
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(intent);
             finish();
         }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(MainActivity.this, Category.class);
+                            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                             startActivity(intent);
                             finish();
 
