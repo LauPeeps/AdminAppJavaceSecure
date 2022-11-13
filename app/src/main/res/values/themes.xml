@@ -14,4 +14,13 @@
         <item name="android:fontFamily">@font/oswald</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.JavaceAdminApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.JavaceAdminApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.JavaceAdminApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

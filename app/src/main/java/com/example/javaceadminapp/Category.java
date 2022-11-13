@@ -29,8 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class
-Category extends AppCompatActivity {
+public class Category extends AppCompatActivity {
     RecyclerView recyclerView;
     Button addCategory;
     public static List<CategoryModel> category_list = new ArrayList<>();
