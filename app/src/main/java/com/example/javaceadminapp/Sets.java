@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +35,10 @@ public class Sets extends AppCompatActivity {
     Button addSetBtn;
     SetsAdapter adapter;
     FirebaseFirestore firestore;
-    Dialog progressDialog;
+    Dialog progressDialog, addPage;
+    EditText topicTitle,topicContent;
+    Button addTopicBtn;
+
 
     public static List<String> idOfSets = new ArrayList<>();
     public static int set_index = 0;
@@ -58,15 +62,34 @@ public class Sets extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.progressbar_background);
         progressDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        addPage = new Dialog(Sets.this);
+        addPage.setContentView(R.layout.add_topic_page);
+        addPage.setCancelable(true);
+        addPage.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
+        topicTitle = addPage.findViewById(R.id.titleText);
+        topicContent = addPage.findViewById(R.id.titleContent);
 
-
+        addTopicBtn = addPage.findViewById(R.id.addTopicBtn);
         addSetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addSet();
-            }
-        });
+          @Override
+          public void onClick(View view) {
+              topicTitle.getText().clear();
+             topicContent.getText().clear();
+              addPage.show();
+          }
+      });
+
+      addTopicBtn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              addSet(topicTitle.getText().toString(), topicContent.getText().toString());
+          }
+      });
+
+
+
+
 
         firestore = FirebaseFirestore.getInstance();
 
@@ -112,14 +135,15 @@ public class Sets extends AppCompatActivity {
 
                         Toast.makeText(Sets.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        
+
                     }
                 });
 
 
     }
 
-    private void addSet() {
+    private void addSet(String title, String content) {
+        addPage.dismiss();
         progressDialog.show();
 
         String current_category_id = category_list.get(category_index).getId();
@@ -144,13 +168,26 @@ public class Sets extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        Toast.makeText(Sets.this, "Submodule added successfully", Toast.LENGTH_SHORT).show();
-                                        idOfSets.add(current_questionNo);
-                                        category_list.get(category_index).setNoOfSets(String.valueOf(idOfSets.size()));
-                                        category_list.get(category_index).setSetBase(String.valueOf(Integer.parseInt(current_questionNo) + 1));
 
+                                        idOfSets.add(current_questionNo);
                                         adapter.notifyItemInserted(idOfSets.size());
-                                        progressDialog.dismiss();
+
+                                        Map<String, Object> topic_data = new ArrayMap<>();
+                                        topic_data.put("Topic_Title", title);
+                                        topic_data.put("Topic_Content", content);
+                                        firestore.collection("Quiz").document(current_category_id)
+                                                        .collection(current_questionNo).document("Topic_List").set(topic_data)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                category_list.get(category_index).setNoOfSets(String.valueOf(idOfSets.size()));
+                                                                category_list.get(category_index).setSetBase(String.valueOf(Integer.parseInt(current_questionNo) + 1));
+
+                                                                adapter.notifyItemInserted(idOfSets.size());
+                                                                progressDialog.dismiss();
+                                                            }
+                                                        });
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

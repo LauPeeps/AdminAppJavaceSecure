@@ -90,7 +90,7 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.Viewholder> {
 
                     set_index = pos;
 
-                    Intent intent = new Intent(itemView.getContext(), Questions.class);
+                    Intent intent = new Intent(itemView.getContext(), TopicActivity.class);
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -119,72 +119,72 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.Viewholder> {
                 }
             });
         }
-            private void deleteSet(int pos, String setID, Context context, SetsAdapter setsAdapter) {
-                progressDialog.show();
+        private void deleteSet(int pos, String setID, Context context, SetsAdapter setsAdapter) {
+            progressDialog.show();
 
-                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-                firestore.collection("Quiz").document(category_list.get(category_index).getId()).collection(setID)
-                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                WriteBatch writeBatch = firestore.batch();
+            firestore.collection("Quiz").document(category_list.get(category_index).getId()).collection(setID)
+                    .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            WriteBatch writeBatch = firestore.batch();
 
-                                for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
-                                    writeBatch.delete(queryDocumentSnapshot.getReference());
+                            for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                                writeBatch.delete(queryDocumentSnapshot.getReference());
+                            }
+                            writeBatch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                    Map<String, Object> category_doc = new ArrayMap<>();
+                                    int index = 1;
+
+                                    for (int i = 0; i < setIds.size(); i++) {
+                                        if (i != pos) {
+                                            category_doc.put("Submodule" + String.valueOf(index) + "_Id", setIds.get(i));
+                                            index++;
+                                        }
+                                    }
+                                    category_doc.put("Submodule", index - 1);
+                                    firestore.collection("Quiz").document(category_list.get(category_index).getId())
+                                            .update(category_doc)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+
+                                                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+
+                                                    Sets.idOfSets.remove(pos);
+
+                                                    category_list.get(category_index).setNoOfSets(String.valueOf(Sets.idOfSets.size()));
+
+                                                    setsAdapter.notifyDataSetChanged();
+                                                    progressDialog.dismiss();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                }
+                                            });
                                 }
-                                writeBatch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-
-                                       Map<String, Object> category_doc = new ArrayMap<>();
-                                       int index = 1;
-
-                                       for (int i = 0; i < setIds.size(); i++) {
-                                           if (i != pos) {
-                                               category_doc.put("Submodule" + String.valueOf(index) + "_Id", setIds.get(i));
-                                               index++;
-                                           }
-                                       }
-                                       category_doc.put("Submodule", index - 1);
-                                       firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                                               .update(category_doc)
-                                               .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                   @Override
-                                                   public void onSuccess(Void unused) {
-
-                                                       Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-
-                                                       Sets.idOfSets.remove(pos);
-
-                                                       category_list.get(category_index).setNoOfSets(String.valueOf(Sets.idOfSets.size()));
-
-                                                       setsAdapter.notifyDataSetChanged();
-                                                       progressDialog.dismiss();
-                                                   }
-                                               }).addOnFailureListener(new OnFailureListener() {
-                                                   @Override
-                                                   public void onFailure(@NonNull Exception e) {
-                                                       Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                       progressDialog.dismiss();
-                                                   }
-                                               });
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        progressDialog.dismiss();
-                                    }
-                                });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                            }
-                        });
-            }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    });
         }
+    }
 }

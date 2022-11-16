@@ -112,8 +112,8 @@ public class QuestionsAdderActivity extends AppCompatActivity {
                     answer.setError("Please enter the correct answer");
                     return;
                 }
-                if (Integer.valueOf(answerStr) > 4) {
-                    answer.setError("Please enter the 1 - 4");
+                if (Integer.valueOf(answerStr) > 4 || Integer.valueOf(answerStr) < 1) {
+                    answer.setError("Please enter number from 1 - 4");
                     return;
                 }
 
