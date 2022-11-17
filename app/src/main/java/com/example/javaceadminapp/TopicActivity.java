@@ -22,6 +22,7 @@ public class TopicActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
     TextView topicTitle, topicContent;
     Button questionBtn;
+    int num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class TopicActivity extends AppCompatActivity {
         topicContent = findViewById(R.id.topicContent);
 
         firestore = FirebaseFirestore.getInstance();
+
 
 
         questionBtn = findViewById(R.id.qBtn);
@@ -61,6 +63,7 @@ public class TopicActivity extends AppCompatActivity {
                 });
 
     }
+
 
 
 }

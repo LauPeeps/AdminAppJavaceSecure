@@ -72,6 +72,8 @@ public class Questions extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        SpacingForItem itemDecorator = new SpacingForItem(15);
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         firestore = FirebaseFirestore.getInstance();

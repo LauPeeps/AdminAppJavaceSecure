@@ -116,13 +116,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void checkRole(String uid) {
-        DocumentReference documentReference = firestore.collection("Users").document(uid);
+        DocumentReference documentReference = firestore.collection("Admins").document(uid);
 
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.getString("admin") != null) {
+                    progressDialog.dismiss();
                     startActivity(new Intent(MainActivity.this, MainActivity2.class));
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Admin does not exist!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

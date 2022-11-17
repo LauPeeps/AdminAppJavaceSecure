@@ -67,9 +67,9 @@ public class QuestionsAdderActivity extends AppCompatActivity {
         action = getIntent().getStringExtra("ACTION");
 
         if (action.compareTo("EDIT") == 0) {
+            question_id = getIntent().getIntExtra("Q_Id", 1);
             fetchData(question_id);
             getSupportActionBar().setTitle("Question " + String.valueOf(question_id + 1));
-            question_id = getIntent().getIntExtra("Q_ID", 0);
 
             addQuestionBtn.setText("Update");
         } else {

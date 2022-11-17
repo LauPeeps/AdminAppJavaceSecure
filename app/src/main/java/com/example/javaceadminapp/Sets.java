@@ -72,20 +72,20 @@ public class Sets extends AppCompatActivity {
 
         addTopicBtn = addPage.findViewById(R.id.addTopicBtn);
         addSetBtn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              topicTitle.getText().clear();
-             topicContent.getText().clear();
-              addPage.show();
-          }
-      });
+            @Override
+            public void onClick(View view) {
+                topicTitle.getText().clear();
+                topicContent.getText().clear();
+                addPage.show();
+            }
+        });
 
-      addTopicBtn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              addSet(topicTitle.getText().toString(), topicContent.getText().toString());
-          }
-      });
+        addTopicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addSet(topicTitle.getText().toString(), topicContent.getText().toString());
+            }
+        });
 
 
 
@@ -176,17 +176,17 @@ public class Sets extends AppCompatActivity {
                                         topic_data.put("Topic_Title", title);
                                         topic_data.put("Topic_Content", content);
                                         firestore.collection("Quiz").document(current_category_id)
-                                                        .collection(current_questionNo).document("Topic_List").set(topic_data)
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                category_list.get(category_index).setNoOfSets(String.valueOf(idOfSets.size()));
-                                                                category_list.get(category_index).setSetBase(String.valueOf(Integer.parseInt(current_questionNo) + 1));
+                                                .collection(current_questionNo).document("Topic_List").set(topic_data)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        category_list.get(category_index).setNoOfSets(String.valueOf(idOfSets.size()));
+                                                        category_list.get(category_index).setSetBase(String.valueOf(Integer.parseInt(current_questionNo) + 1));
 
-                                                                adapter.notifyItemInserted(idOfSets.size());
-                                                                progressDialog.dismiss();
-                                                            }
-                                                        });
+                                                        adapter.notifyItemInserted(idOfSets.size());
+                                                        progressDialog.dismiss();
+                                                    }
+                                                });
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

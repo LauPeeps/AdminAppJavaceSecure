@@ -178,7 +178,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                         public void onSuccess(Void unused) {
 
                             firestore.collection("Quiz").document(category_list.get(id).getId())
-                                            .delete();
+                                    .delete();
 
                             Toast.makeText(context, "Module deleted successfully", Toast.LENGTH_SHORT).show();
 
