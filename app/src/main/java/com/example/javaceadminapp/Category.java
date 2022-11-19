@@ -160,7 +160,6 @@ public class Category extends AppCompatActivity {
                         category_list.add(new CategoryModel(document_id, categoryName, "0", "1"));
 
                         categoryAdapter.notifyItemInserted(category_list.size());
-
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
