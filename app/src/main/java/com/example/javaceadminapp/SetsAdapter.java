@@ -90,6 +90,7 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.Viewholder> {
 
                     set_index = pos;
 
+
                     Intent intent = new Intent(itemView.getContext(), TopicActivity.class);
                     itemView.getContext().startActivity(intent);
                 }

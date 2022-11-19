@@ -36,6 +36,7 @@ public class TopicActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
 
+        num = set_index;
 
         questionBtn = findViewById(R.id.qBtn);
 
@@ -53,7 +54,7 @@ public class TopicActivity extends AppCompatActivity {
 
 
         firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                .collection(idOfSets.get(set_index)).document("Topic_List").get()
+                .collection(idOfSets.get(num)).document("Topic_List").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
