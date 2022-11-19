@@ -72,6 +72,16 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             case R.id.feedback:
                 redirectActivity(MainActivity2.this, Feedback.class);
                 break;
+            case R.id.admin:
+                redirectActivity(MainActivity2.this, Admin.class);
+                break;
+            case R.id.progress:
+                redirectActivity(MainActivity2.this, Progress.class);
+                break;
+            case R.id.resources:
+                redirectActivity(MainActivity2.this, Resources.class);
+                break;
+
             case R.id.logout:
                 firebaseAuth.signOut();
                 redirectActivity(MainActivity2.this, MainActivity.class);

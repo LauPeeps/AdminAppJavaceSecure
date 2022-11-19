@@ -18,6 +18,27 @@
         android:theme="@style/Theme.JavaceAdminApp"
         tools:targetApi="31">
         <activity
+            android:name=".Resources"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Progress"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Admin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Feedback"
             android:exported="false">
             <meta-data

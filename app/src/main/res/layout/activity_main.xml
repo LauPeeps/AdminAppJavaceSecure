@@ -46,14 +46,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_design"
         android:text="Login"
         android:textColor="#51278C"
         android:textSize="21dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:layout_marginHorizontal="50dp"
         />
 
 
