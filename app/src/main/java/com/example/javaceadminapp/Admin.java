@@ -38,17 +38,15 @@ import java.util.Objects;
 
 
 public class Admin extends AppCompatActivity {
-    Dialog progressDialog, addPage;
-    Button addAdmin, registerAdmin;
+    Dialog progressDialog;
+    Button addAdmin;
     FirebaseAuth firebaseAuth;
-    EditText adminName, adminEmail, adminPassword;
 
     List<AdminModel> adminModelList = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firestore;
     AdminAdapter adminAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,18 +69,8 @@ public class Admin extends AppCompatActivity {
         progressDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 
-        addPage = new Dialog(Admin.this);
-        addPage.setContentView(R.layout.add_admin_page);
-        addPage.setCancelable(true);
-        addPage.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         addAdmin = findViewById(R.id.addAdminBtn);
-
-        adminName = addPage.findViewById(R.id.adminName);
-        adminEmail = addPage.findViewById(R.id.adminEmail);
-        adminPassword = addPage.findViewById(R.id.adminPassword);
-        registerAdmin = addPage.findViewById(R.id.registerAdmin);
-
 
         recyclerView = findViewById(R.id.admin_recycler);
         recyclerView.setHasFixedSize(true);
@@ -92,29 +80,16 @@ public class Admin extends AppCompatActivity {
         addAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addPage.show();
-            }
-        });
-
-        registerAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (adminName.getText().toString().isEmpty()) {
-                    adminName.setError("Please enter admin name");
-                    return;
-                } if (adminPassword.getText().toString().isEmpty() || adminPassword.getText().toString().length() <= 7) {
-                    adminPassword.setError("Password should not be empty and more than 7");
-                    return;
-                } if (adminEmail.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(adminEmail.getText().toString()).matches()) {
-                    adminEmail.setError("Invalid email");
-                    return;
-                }
-                addAdmin(adminName.getText().toString(), adminEmail.getText().toString(), adminPassword.getText().toString());
+                Intent intent = new Intent(Admin.this, AdminAddActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
 
         fetchAdmin();
+
+
 
 
     }
@@ -145,45 +120,6 @@ public class Admin extends AppCompatActivity {
         });
     }
 
-    private void addAdmin(String name, String email, String password) {
-        addPage.dismiss();
-        progressDialog.show();
-
-            firebaseAuth.createUserWithEmailAndPassword(adminEmail.getText().toString(), adminPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-
-                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    String uid = firebaseUser.getUid();
-
-                    DocumentReference documentReference = firestore.collection("Admins").document(firebaseUser.getUid());
-
-                    Map<String, Object> admin_data = new HashMap<>();
-                    admin_data.put("uid", uid);
-                    admin_data.put("email", email);
-                    admin_data.put("name", name);
-                    admin_data.put("admin", "yes");
-
-                    documentReference.set(admin_data);
-
-                    Toast.makeText(Admin.this, "Admin added successfully", Toast.LENGTH_SHORT).show();
-
-                    adminAdapter.notifyItemInserted(adminModelList.size());
-
-                    progressDialog.dismiss();
-
-                    finish();
-
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Admin.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            });
-        }
 
 
     @Override

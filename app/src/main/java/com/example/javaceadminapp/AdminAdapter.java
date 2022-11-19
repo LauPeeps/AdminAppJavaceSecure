@@ -1,6 +1,9 @@
 package com.example.javaceadminapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,28 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
 
             @Override
             public void onOneLongClick(View view, int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(admin);
+
+                String[] options = {"Update", "Delete"};
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {
+                            String uid = adminModelList.get(position).getUid();
+                            String name = adminModelList.get(position).getName();
+                            String email = adminModelList.get(position).getEmail();
+
+                            Intent intent = new Intent(admin, AdminAddActivity.class);
+                            intent.putExtra("aid", uid);
+                            intent.putExtra("aname", name);
+                            intent.putExtra("aemail", email);
+
+                            admin.startActivity(intent);
+                        } if (i == 1) {
+
+                        }
+                    }
+                }).create().show();
 
             }
         });
