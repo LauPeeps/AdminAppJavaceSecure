@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -40,7 +42,8 @@ public class StudentAddActivity extends AppCompatActivity {
     EditText userName, userEmail, userPassword;
     Button registerUser;
     String aid, aname, aemail;
-
+    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,9 @@ public class StudentAddActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.studentPassword);
         registerUser = findViewById(R.id.registerUser);
 
+
+        firebaseDatabase  = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -114,13 +120,29 @@ public class StudentAddActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.updateEmail(email);
+
         firestore.collection("Users").document(id).update("name", name, "email", email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        progressDialog.dismiss();
-                        Toast.makeText(StudentAddActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
 
+                        HashMap<String, Object> result = new HashMap<>();
+                        result.put("name", name);
+                        result.put("email", email);
+
+                        databaseReference.child(id).updateChildren(result).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                Toast.makeText(StudentAddActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Toast.makeText(StudentAddActivity.this, "Unable to update", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         Intent intent = new Intent(StudentAddActivity.this, Student.class);
                         startActivity(intent);
                         finish();
@@ -156,6 +178,20 @@ public class StudentAddActivity extends AppCompatActivity {
                 student_data.put("score", "0");
 
                 documentReference.set(student_data);
+
+                FirebaseUser firebaseUsers = firebaseAuth.getCurrentUser();
+                assert firebaseUsers != null;
+                String uids = firebaseUsers.getUid();
+                HashMap<Object, String> hashMap = new HashMap<>();
+                hashMap.put("email", email);
+                hashMap.put("name", name);
+                hashMap.put("uid", uids);
+                hashMap.put("user", "yes");
+                hashMap.put("image", "");
+
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://javacemahman-10e8a-default-rtdb.firebaseio.com/");
+                DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
+                databaseReference.child(uid).setValue(hashMap);
 
                 progressDialog.dismiss();
                 Toast.makeText(StudentAddActivity.this, "Student added successfully", Toast.LENGTH_SHORT).show();
