@@ -1,6 +1,7 @@
 package com.example.javaceadminapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,20 +14,26 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Objects;
 
 public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     FirebaseAuth firebaseAuth;
     DrawerLayout drawerLayout;
-
-
+    TextView adminNameInNav;
+    String adminId;
+    FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_main2);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
+        firestore = FirebaseFirestore.getInstance();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

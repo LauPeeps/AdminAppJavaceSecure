@@ -14,14 +14,5 @@
         android:layout_marginTop="40dp"
         android:src="@drawable/logo"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin"
-        android:textStyle="bold"
-        android:textSize="21dp"
-        android:textColor="#5C8326"
-        android:paddingLeft="22dp"
-        android:paddingTop="4dp"/>
 
 </LinearLayout>
