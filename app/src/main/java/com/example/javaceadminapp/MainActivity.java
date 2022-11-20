@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String uEmail = userName.getText().toString();
                 String uPass = pass.getText().toString();
 
@@ -90,15 +89,19 @@ public class MainActivity extends AppCompatActivity {
                     pass.setError("Please enter your password");
                     pass.setFocusable(true);
                 }else {
+                    progressDialog.show();
+
                     firebaseAuth.signInWithEmailAndPassword(uEmail, uPass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            progressDialog.dismiss();
                             checkRole(authResult.getUser().getUid());
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
                             Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -121,12 +124,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.getString("admin") != null) {
-                    progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, MainActivity2.class));
                     finish();
                 } else {
-                    progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Admin does not exist!", Toast.LENGTH_SHORT).show();
                     firebaseAuth.signOut();
                     progressDialog.dismiss();
