@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -127,6 +129,11 @@ public class Student extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+
+                        DatabaseReference userSpecific = FirebaseDatabase.getInstance().getReference("Users").child(studentModelList.get(index).getUid());
+                        userSpecific.removeValue();
+
+
                         Toast.makeText(Student.this, "Admin deleted", Toast.LENGTH_SHORT).show();
                         fetchUser();
                     }
