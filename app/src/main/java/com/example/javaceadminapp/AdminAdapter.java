@@ -70,7 +70,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
 
                             admin.startActivity(intent);
                         } if (i == 1) {
-
+                            admin.deleteAdmin(position);
                         }
                         if (i == 2) {
                             String uid = adminModelList.get(position).getUid();

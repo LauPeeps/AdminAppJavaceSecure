@@ -99,6 +99,7 @@ public class Admin extends AppCompatActivity {
         firestore.collection("Admins").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                adminModelList.clear();
                 progressDialog.dismiss();
 
                 for (DocumentSnapshot documentSnapshot: task.getResult()) {
@@ -118,6 +119,26 @@ public class Admin extends AppCompatActivity {
 
             }
         });
+    }
+
+    void deleteAdmin(int index) {
+        progressDialog.show();
+
+        firestore.collection("Admins").document(adminModelList.get(index).getUid()).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Admin.this, "Admin deleted", Toast.LENGTH_SHORT).show();
+                        fetchAdmin();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Admin.this, "Unable to delete admin", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
 
