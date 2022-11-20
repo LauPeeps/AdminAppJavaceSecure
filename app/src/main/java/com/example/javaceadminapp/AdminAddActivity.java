@@ -73,6 +73,7 @@ public class AdminAddActivity extends AppCompatActivity {
 
             adminName.setText(aname);
             adminEmail.setText(aemail);
+            adminPassword.setVisibility(View.GONE);
         } else {
             registerAdmin.setText("Add");
         }

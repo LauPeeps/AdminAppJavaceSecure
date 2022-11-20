@@ -4,12 +4,23 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -43,7 +54,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
             public void onOneLongClick(View view, int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(admin);
 
-                String[] options = {"Update", "Delete"};
+                String[] options = {"Update", "Delete", "Change Password"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -61,6 +72,13 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
                         } if (i == 1) {
 
                         }
+                        if (i == 2) {
+                            String uid = adminModelList.get(position).getUid();
+                            Intent intent = new Intent(admin, ChangePassword.class);
+                            intent.putExtra("aid", uid);
+                            admin.startActivity(intent);
+                        }
+
                     }
                 }).create().show();
 
@@ -70,6 +88,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
 
         return userAdminViewholder;
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull AdminViewholder holder, int position) {

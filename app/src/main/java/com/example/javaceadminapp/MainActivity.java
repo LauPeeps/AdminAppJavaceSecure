@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     firebaseAuth.signInWithEmailAndPassword(uEmail, uPass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                             checkRole(authResult.getUser().getUid());
 
                         }
@@ -123,10 +122,14 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.getString("admin") != null) {
                     progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, MainActivity2.class));
+                    finish();
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Admin does not exist!", Toast.LENGTH_SHORT).show();
+                    firebaseAuth.signOut();
+                    progressDialog.dismiss();
                 }
             }
         });

@@ -20,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     FirebaseAuth firebaseAuth;
     DrawerLayout drawerLayout;
@@ -33,8 +35,11 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Javace");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
