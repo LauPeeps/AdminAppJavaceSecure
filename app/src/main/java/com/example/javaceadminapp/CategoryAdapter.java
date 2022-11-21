@@ -206,17 +206,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             Map<String, Object> category_data = new ArrayMap<>();
 
-            category_data.put("NAME", newName);
+            category_data.put("Module", newName);
 
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-            firestore.collection("Module").document(category_list.get(pos).getId())
+            firestore.collection("Quiz").document(category_list.get(pos).getId())
                     .update(category_data)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Map<String, Object> category_doc = new ArrayMap<>();
-                            category_doc.put("Module" + String.valueOf(pos + 1) + "_NAME", newName);
+                            category_doc.put("Module" + String.valueOf(pos + 1) + "_name", newName);
 
                             firestore.collection("Quiz").document("Module")
                                     .update(category_doc)
