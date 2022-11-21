@@ -130,8 +130,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     AlertDialog alertDialog = new AlertDialog.Builder(itemView.getContext())
-                            .setTitle("Category Deletion")
-                            .setMessage("Delete this category?")
+                            .setTitle("Module Deletion")
+                            .setMessage("Delete this module?")
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

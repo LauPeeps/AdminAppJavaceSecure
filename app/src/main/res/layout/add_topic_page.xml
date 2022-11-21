@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="700dp"
-    android:background="#EDC9D7"
+    android:background="#A1D59B"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="100dp"
             android:hint="Topic title"
+            android:inputType="textPersonName"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             />
@@ -37,10 +38,10 @@
             <Button
                 android:layout_gravity="center"
                 android:id="@+id/addTopicBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Add Topic"
-                android:backgroundTint="#181818"
+                android:backgroundTint="#2B2525"
 
                 />
 

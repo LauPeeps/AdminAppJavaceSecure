@@ -27,6 +27,7 @@
         android:layout_marginTop="23dp"
         android:text="Add Module Name"
         android:textSize="18sp"
+        android:backgroundTint="#2B2525"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

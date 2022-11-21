@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDC9D7"
+    android:background="#A1D59B"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
+            android:inputType="textPersonName"
             android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:layout_marginBottom="10dp"

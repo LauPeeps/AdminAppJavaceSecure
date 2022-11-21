@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
+        android:inputType="textPersonName"
         android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="21dp"
         android:textColorHint="#433636"
