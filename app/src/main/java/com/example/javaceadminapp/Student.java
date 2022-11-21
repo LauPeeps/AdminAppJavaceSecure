@@ -134,7 +134,7 @@ public class Student extends AppCompatActivity {
                         userSpecific.removeValue();
 
 
-                        Toast.makeText(Student.this, "Admin deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Student.this, "Student deleted", Toast.LENGTH_SHORT).show();
                         fetchUser();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
