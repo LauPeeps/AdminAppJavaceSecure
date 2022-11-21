@@ -138,10 +138,10 @@ public class ForumAdapter extends RecyclerView.Adapter<com.example.javaceadminap
         holder.commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(context, ForumComments.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //intent.putExtra("pid", timePosted);
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, ForumComment.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("pid", timePosted);
+                context.startActivity(intent);
             }
         });
     }

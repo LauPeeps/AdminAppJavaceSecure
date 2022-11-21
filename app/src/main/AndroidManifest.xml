@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaceAdminApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ForumComment"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".StudentAddActivity"
             android:exported="false">
