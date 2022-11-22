@@ -83,6 +83,13 @@ public class Sets extends AppCompatActivity {
         addTopicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (topicTitle.getText().toString().isEmpty()) {
+                    topicTitle.setError("Please enter topic title");
+                    return;
+                } if (topicContent.getText().toString().isEmpty()) {
+                    topicContent.setError("Please enter topic content");
+                    return;
+                }
                 addSet(topicTitle.getText().toString(), topicContent.getText().toString());
             }
         });

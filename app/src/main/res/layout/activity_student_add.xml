@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A1D59B"
+    android:background="#B3B9D5"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -21,6 +21,8 @@
             android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:layout_marginBottom="10dp"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:background="@drawable/edit_text_background"
             />
         <EditText
             android:id="@+id/studentEmail"
@@ -31,6 +33,8 @@
             android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:layout_marginBottom="10dp"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:background="@drawable/edit_text_background"
             />
         <EditText
             android:id="@+id/studentPassword"
@@ -41,6 +45,7 @@
             android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
             />
 
 
@@ -50,8 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:text="Register User"
-            android:backgroundTint="#2B2525"
+            android:backgroundTint="#8D94AF"
             android:layout_marginTop="100dp"
+            android:textColor="#232429"
             />
 
 

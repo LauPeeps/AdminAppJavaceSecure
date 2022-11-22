@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A1D59B"
+    android:background="#B3B9D5"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -14,7 +14,7 @@
 
         <EditText
             android:textCursorDrawable="@drawable/text_cursor"
-            android:backgroundTint="#2B2516"
+            android:background="@drawable/edit_text_background"
             android:id="@+id/adminName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             />
         <EditText
             android:textCursorDrawable="@drawable/text_cursor"
-            android:backgroundTint="#2B2516"
+            android:background="@drawable/edit_text_background"
             android:id="@+id/adminEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             />
         <EditText
             android:textCursorDrawable="@drawable/text_cursor"
-            android:backgroundTint="#2B2516"
+            android:background="@drawable/edit_text_background"
             android:id="@+id/adminPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,14 +51,14 @@
 
 
             <Button
-                android:textColor="#2B2525"
                 android:id="@+id/registerAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="50dp"
                 android:text="Register Admin"
-                android:backgroundTint="#7AB574"
+                android:backgroundTint="#8D94AF"
                 android:layout_marginTop="100dp"
+                android:textColor="#232429"
                 />
 
 
