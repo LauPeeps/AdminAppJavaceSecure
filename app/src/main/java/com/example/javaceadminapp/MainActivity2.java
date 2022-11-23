@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -32,8 +34,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +46,13 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     DrawerLayout drawerLayout;
     FirebaseFirestore firestore;
     Dialog progressDialog;
+
+
+    List<ExercisesModel> exercisesModels = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    ExercisesAdapter exercisesAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +84,47 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 
 
 
+        recyclerView = findViewById(R.id.exerciseRecycler);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 
+        fetchExercises();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchExercises();
+    }
+
+    private void fetchExercises() {
+        progressDialog.show();
+        firestore.collection("Exercises").orderBy("exercise_score", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                exercisesModels.clear();
+                progressDialog.dismiss();
+
+                for (DocumentSnapshot documentSnapshot: task.getResult()) {
+                    ExercisesModel exercisesModel = new ExercisesModel(documentSnapshot.getString("eid"),
+                            documentSnapshot.getString("exercise_title"), documentSnapshot.getString("exercise_content"),
+                            documentSnapshot.getString("exercise_score"));
+                    exercisesModels.add(exercisesModel);
+                }
+                exercisesAdapter = new ExercisesAdapter(MainActivity2.this, exercisesModels);
+                recyclerView.setAdapter(exercisesAdapter);
+                exercisesAdapter.notifyItemInserted(exercisesModels.size());
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 
     @Override
