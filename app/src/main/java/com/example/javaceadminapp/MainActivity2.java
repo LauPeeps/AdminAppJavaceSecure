@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,9 +40,6 @@ import java.util.Objects;
 public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     FirebaseAuth firebaseAuth;
     DrawerLayout drawerLayout;
-    TextView adminNameInNav;
-    String adminId;
-    List<AdminModel> adminModelList;
     FirebaseFirestore firestore;
     Dialog progressDialog;
     @Override
@@ -72,6 +70,9 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+
+
 
 
 
@@ -119,6 +120,9 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             case R.id.quiz:
                 redirectActivity(MainActivity2.this, Category.class);
                 break;
+            case R.id.exercises:
+                redirectActivity(MainActivity2.this, ExerciseActivity.class);
+                break;
             case R.id.forum:
                 redirectActivity(MainActivity2.this, Forum.class);
                 break;
@@ -134,7 +138,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             case R.id.resources:
                 redirectActivity(MainActivity2.this, Resources.class);
                 break;
-
             case R.id.logout:
                 firebaseAuth.signOut();
                 redirectActivity(MainActivity2.this, MainActivity.class);

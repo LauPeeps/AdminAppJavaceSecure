@@ -28,11 +28,11 @@ public class PdfView extends AppCompatActivity {
 
      pdfView = findViewById(R.id.pdfView);
 
-     String url = getIntent().getStringExtra("fileurl");
+     String url = getIntent().getStringExtra("fileUrl");
 
-     new PdfView.RetrivePdfStream().execute(url);
+     new PdfView.RetrievePdf().execute(url);
     }
-    class RetrivePdfStream extends AsyncTask<String, Void, InputStream> {
+    class RetrievePdf extends AsyncTask<String, Void, InputStream> {
 
         @Override
         protected InputStream doInBackground(String... strings) {

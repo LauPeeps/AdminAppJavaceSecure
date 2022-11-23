@@ -75,7 +75,7 @@ public class Resources extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), PdfView.class);
                 intent.putExtra("filename", pdfModel.getName());
-                intent.putExtra("fileurl", pdfModel.getUrl());
+                intent.putExtra("fileUrl", pdfModel.getUrl());
                 startActivity(intent);
             }
         });

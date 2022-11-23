@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_quiz"
             android:title="Quiz"/>
 
+        <item android:id="@+id/exercises"
+            android:icon="@drawable/ic_exercises"
+            android:title="Exercises"/>
+
         <item android:id="@+id/progress"
             android:icon="@drawable/ic_progress"
             android:title="Progress"/>
