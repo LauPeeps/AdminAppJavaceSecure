@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,7 +87,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 
         recyclerView = findViewById(R.id.exerciseRecycler);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -99,6 +100,25 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         super.onResume();
         fetchExercises();
     }
+    void deleteExercise(int index) {
+        progressDialog.show();
+
+        firestore.collection("Exercises").document(exercisesModels.get(index).geteId()).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(MainActivity2.this, "Exercise deleted", Toast.LENGTH_SHORT).show();
+                        fetchExercises();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(MainActivity2.this, "Unable to delete exercise", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
 
     private void fetchExercises() {
         progressDialog.show();
@@ -109,8 +129,10 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                 progressDialog.dismiss();
 
                 for (DocumentSnapshot documentSnapshot: task.getResult()) {
-                    ExercisesModel exercisesModel = new ExercisesModel(documentSnapshot.getString("eid"),
-                            documentSnapshot.getString("exercise_title"), documentSnapshot.getString("exercise_content"),
+                    ExercisesModel exercisesModel = new ExercisesModel(documentSnapshot.getString("eId"),
+                            documentSnapshot.getString("exercise_title"),
+                            documentSnapshot.getString("exercise_instruction"),
+                            documentSnapshot.getString("exercise_content"),
                             documentSnapshot.getString("exercise_score"));
                     exercisesModels.add(exercisesModel);
                 }

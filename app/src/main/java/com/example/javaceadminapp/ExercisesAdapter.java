@@ -46,35 +46,32 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesViewholder> 
         exercisesViewholder.setOnClickListener(new ExercisesViewholder.ListenerClicker() {
             @Override
             public void onOneClick(View view, int position) {
+                String eid  = exercisesModelList.get(position).geteId();
+                String title = exercisesModelList.get(position).getExercise_title();
+                String instruction = exercisesModelList.get(position).getExercise_instruction();
+                String content = exercisesModelList.get(position).getExercise_content();
+                String score = exercisesModelList.get(position).getExercise_score();
 
+                Intent intent = new Intent(mainActivity2, ExerciseActivity.class);
+                intent.putExtra("eId", eid);
+                intent.putExtra("title", title);
+                intent.putExtra("instruction", instruction);
+                intent.putExtra("content", content);
+                intent.putExtra("score", score);
+
+                mainActivity2.startActivity(intent);
             }
 
             @Override
             public void onOneLongClick(View view, int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity2);
 
-                String[] options = {"Update", "Delete", "Change Password"};
+                String[] options = {"Delete"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
-                            String eId = exercisesModelList.get(position).geteId();
-                            String title = exercisesModelList.get(position).getExercise_title();
-                            String content = exercisesModelList.get(position).getExercise_content();
-                            String score = exercisesModelList.get(position).getExercise_score();
-
-                            Intent intent = new Intent(mainActivity2, AdminAddActivity.class);
-                            intent.putExtra("eId", eId);
-                            intent.putExtra("title", title);
-                            intent.putExtra("content", content);
-                            intent.putExtra("score", score);
-
-                            mainActivity2.startActivity(intent);
-                        } if (i == 1) {
-                            //mainActivity2.deleteAdmin(position);
-                        }
-                        if (i == 2) {
-
+                            mainActivity2.deleteExercise(position);
                         }
 
                     }
