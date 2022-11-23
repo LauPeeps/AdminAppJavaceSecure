@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#B3B9D5"
+    android:gravity="center"
+    tools:context=".ResourcesUpload">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PDF Upload"
+        android:gravity="center"
+        android:textSize="38dp"
+        android:textColor="#5C3642"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/pdfUploadText"
+        />
+
+    <EditText
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:id="@+id/pdfTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modern_pdf_input"
+        android:hint="Enter PDF name"
+        android:layout_marginHorizontal="20dp"
+        android:padding="8dp"
+        android:inputType="textPersonName"
+        />
+
+    <Button
+        android:id="@+id/uploadPdfBtn"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:text="Upload PDF"
+        android:textStyle="bold"
+        android:textColor="#232429"
+        android:backgroundTint="#8D94AF"/>
+
+
+
+</LinearLayout>
