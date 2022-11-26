@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="#492121"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+
+        >
+        <EditText
+            android:id="@+id/addModuleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Module Name"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
+            />
+        <EditText
+            android:gravity="start"
+            android:id="@+id/addModuleMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Module Preview"
+            android:inputType="textMultiLine"
+            android:maxLength="30"
+            android:height="100dp"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
+            />
+        <Button
+            android:id="@+id/addModuleBtnDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Module"
+            android:backgroundTint="@color/purple_200"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

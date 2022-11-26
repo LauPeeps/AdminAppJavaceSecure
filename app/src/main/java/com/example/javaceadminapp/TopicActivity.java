@@ -24,17 +24,24 @@ public class TopicActivity extends AppCompatActivity {
     TextView topicTitle, topicContent;
     Button questionBtn;
     int num;
+    String subid, subname, moduleid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
 
+        Bundle bundle = getIntent().getExtras();
 
+        subid = bundle.getString("subid");
+        subname = bundle.getString("subname");
+        moduleid = bundle.getString("moduleid");
 
         topicTitle = findViewById(R.id.topicTitle);
         topicContent = findViewById(R.id.topicContent);
 
         firestore = FirebaseFirestore.getInstance();
+
+
 
 
         num = set_index;
@@ -54,13 +61,13 @@ public class TopicActivity extends AppCompatActivity {
 
 
 
-        firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                .collection(idOfSets.get(num)).document("Topic_List").get()
+        firestore.collection("Quizzes").document(moduleid)
+                .collection(subid).document("Topic_List").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        topicTitle.setText(documentSnapshot.getString("Topic_Title"));
-                        topicContent.setText(documentSnapshot.getString("Topic_Content"));
+                        topicTitle.setText(documentSnapshot.getString("topic_title"));
+                        topicContent.setText(documentSnapshot.getString("topic_content"));
                     }
                 });
 

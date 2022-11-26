@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#B3B9D5"
+    android:background="@drawable/module_background"
     tools:context=".TopicActivity">
 
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Title"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
         <View
@@ -41,23 +41,21 @@
             android:layout_height="400dp"
             android:gravity="start"
             android:text="Content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:padding="8dp"
             android:scrollbars="vertical"
             android:background="@drawable/topic_background"
             />
+        <Button
+            android:id="@+id/qBtn"
+            android:layout_marginTop="2dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Question"
+            android:backgroundTint="#2B2525"
+            android:layout_gravity="center_horizontal"
+            />
 
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/qBtn"
-        android:layout_marginTop="2dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Question"
-        android:backgroundTint="#2B2525"
-        android:layout_gravity="center_horizontal"
-        />
 
 </LinearLayout>

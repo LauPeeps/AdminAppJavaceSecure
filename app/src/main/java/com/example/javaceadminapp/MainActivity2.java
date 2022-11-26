@@ -73,7 +73,7 @@ public class MainActivity2 extends AppCompatActivity{
         imgQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirectActivity(MainActivity2.this, Category.class);
+                redirectActivity(MainActivity2.this, Module.class);
 
             }
         });
