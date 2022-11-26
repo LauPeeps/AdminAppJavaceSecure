@@ -105,7 +105,9 @@ public class Student extends AppCompatActivity {
 
                 for (DocumentSnapshot documentSnapshot: task.getResult()) {
                     StudentModel studentModel = new StudentModel(documentSnapshot.getString("uid"),
-                            documentSnapshot.getString("name"),
+                            documentSnapshot.getString("username"),
+                            documentSnapshot.getString("fullname"),
+                            documentSnapshot.getString("phone"),
                             documentSnapshot.getString("email"));
                     studentModelList.add(studentModel);
                 }
@@ -156,5 +158,11 @@ public class Student extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

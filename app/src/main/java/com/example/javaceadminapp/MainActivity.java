@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText userName, pass;
+    private EditText adminFirst, adminSecond;
     Button loginBtn;
     FirebaseAuth firebaseAuth;
     Dialog progressDialog;
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
-        userName = findViewById(R.id.username);
-        pass = findViewById(R.id.password);
-        loginBtn = findViewById(R.id.login);
+        adminFirst = findViewById(R.id.adminEmail);
+        adminSecond = findViewById(R.id.adminPassword);
+        loginBtn = findViewById(R.id.adminLoginBtn);
 
         progressDialog = new Dialog(MainActivity.this);
         progressDialog.setContentView(R.layout.loading_progressbar);
@@ -53,41 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        /*loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (userName.getText().toString().isEmpty()) {
-                    userName.setError("Username required");
-                    return;
-                } else {
-                    userName.setError(null);
-                }
-                if (pass.getText().toString().isEmpty()) {
-                    pass.setError("Password is required");
-                    return;
-                }
-                else {
-                    pass.setError(null);
-                }
-                adminLogin();
-
-
-            }
-        });
-        */
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uEmail = userName.getText().toString();
-                String uPass = pass.getText().toString();
+                String uEmail = adminFirst.getText().toString();
+                String uPass = adminSecond.getText().toString();
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(uEmail).matches()) {
-                    userName.setError("Invalid Email");
-                    userName.setFocusable(true);
+                    adminFirst.setError("Invalid Email");
+                    adminFirst.setFocusable(true);
 
                 } if (uPass.isEmpty()) {
-                    pass.setError("Please enter your password");
-                    pass.setFocusable(true);
+                    adminSecond.setError("Please enter your password");
+                    adminSecond.setFocusable(true);
                 }else {
                     progressDialog.show();
 

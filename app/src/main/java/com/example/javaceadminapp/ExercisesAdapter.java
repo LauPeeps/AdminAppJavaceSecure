@@ -71,7 +71,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesViewholder> 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
-                            mainActivity2.deleteExercise(position);
+
                         }
 
                     }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StudentViewholder extends RecyclerView.ViewHolder {
 
-    TextView textName, textEmail;
+    TextView textName, textFullname, textPhone, textEmail;
     View view;
 
     public StudentViewholder(@NonNull View itemView) {
@@ -31,8 +31,10 @@ public class StudentViewholder extends RecyclerView.ViewHolder {
             }
         });
 
-        textName = itemView.findViewById(R.id.name);
-        textEmail = itemView.findViewById(R.id.email);
+        textName = itemView.findViewById(R.id.userNameText);
+        textFullname = itemView.findViewById(R.id.fullnameText);
+        textPhone = itemView.findViewById(R.id.userPhoneText);
+        textEmail = itemView.findViewById(R.id.userEmailText);
     }
     private StudentViewholder.ListenerClicker listenerClicker;
 

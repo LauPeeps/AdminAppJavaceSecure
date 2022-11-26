@@ -18,23 +18,41 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_student_item"
             />
+
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/userEmailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Name"
-            android:layout_below="@id/adminLogo"
-            />
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Email"
-            android:layout_centerInParent="true"
-            android:layout_below="@id/adminLogo"
-            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
             />
+
+        <TextView
+            android:id="@+id/userPhoneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black"
+        />
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Username"
+            android:layout_below="@id/adminLogo"
+            />
+
+        <TextView
+            android:id="@+id/fullnameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adminLogo"
+            android:layout_centerInParent="true"
+            android:text="Fullname"
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

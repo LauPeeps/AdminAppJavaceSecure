@@ -89,13 +89,13 @@
                 app:cardElevation="8dp">
                 
                 <LinearLayout
-                    android:id="@+id/goToAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/goToAdmin"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -119,13 +119,13 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/goToStudents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/goToStudents"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -133,7 +133,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Students"
+                        android:text="Student"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
 
@@ -157,13 +157,13 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/goToQuiz"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/goToQuiz"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -187,14 +187,13 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/goToResources"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     >
                     <ImageView
-                        android:id="@+id/goToExercises"
+                        android:id="@+id/goToResources"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -232,6 +231,7 @@
                     android:layout_gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/goToExercises"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -255,13 +255,13 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/goToFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/goToFeedback"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -275,6 +275,45 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="#332E2E"
+                android:layout_margin="12dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    >
+                    <ImageView
+                        android:id="@+id/goToForum"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/img_forum"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Forum"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
 

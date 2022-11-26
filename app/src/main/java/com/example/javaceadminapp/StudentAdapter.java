@@ -60,13 +60,17 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentViewholder> {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
                             String uid = studentModelList.get(position).getUid();
-                            String name = studentModelList.get(position).getName();
+                            String username = studentModelList.get(position).getUsername();
+                            String fullname = studentModelList.get(position).getFullname();
+                            String phoneNumber = studentModelList.get(position).getPhone();
                             String email = studentModelList.get(position).getEmail();
 
                             Intent intent = new Intent(student, StudentAddActivity.class);
-                            intent.putExtra("aid", uid);
-                            intent.putExtra("aname", name);
-                            intent.putExtra("aemail", email);
+                            intent.putExtra("userId", uid);
+                            intent.putExtra("userName", username);
+                            intent.putExtra("userFullName", fullname);
+                            intent.putExtra("userPhoneNumber", phoneNumber);
+                            intent.putExtra("userEmail", email);
 
                             student.startActivity(intent);
                         } if (i == 1) {
@@ -94,7 +98,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentViewholder> {
     @Override
     public void onBindViewHolder(@NonNull StudentViewholder holder, int position) {
         holder.textEmail.setText(studentModelList.get(position).getEmail());
-        holder.textName.setText(studentModelList.get(position).getName());
+        holder.textName.setText(studentModelList.get(position).getUsername());
+        holder.textFullname.setText(studentModelList.get(position).getFullname());
+        holder.textPhone.setText(studentModelList.get(position).getPhone());
     }
 
     @Override

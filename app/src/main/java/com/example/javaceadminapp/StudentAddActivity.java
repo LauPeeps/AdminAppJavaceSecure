@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,21 +40,25 @@ public class StudentAddActivity extends AppCompatActivity {
     Dialog progressDialog;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
-    EditText userName, userEmail, userPassword;
+    EditText userName, userFullName, phone, userEmail, userPassword;
     Button registerUser;
-    String aid, aname, aemail;
+    String uid, uname, ufullname, uphone, uemail;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
+    TextView regText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_add);
 
+        regText = findViewById(R.id.registerText);
 
-        userName = findViewById(R.id.studentName);
-        userEmail = findViewById(R.id.studentEmail);
-        userPassword = findViewById(R.id.studentPassword);
-        registerUser = findViewById(R.id.registerUser);
+        userName = findViewById(R.id.userUsername);
+        userFullName = findViewById(R.id.userFullName);
+        phone = findViewById(R.id.userPhone);
+        userEmail = findViewById(R.id.userEmail);
+        userPassword = findViewById(R.id.userPassword);
+
 
 
         firebaseDatabase  = FirebaseDatabase.getInstance();
@@ -68,17 +73,24 @@ public class StudentAddActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.progressbar_background);
         progressDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        registerUser = findViewById(R.id.userRegBtn);
 
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
+            regText.setText("Update User");
             registerUser.setText("Update");
-            aid = bundle.getString("aid");
-            aname = bundle.getString("aname");
-            aemail = bundle.getString("aemail");
+            uid = bundle.getString("userId");
+            uname = bundle.getString("userName");
+            ufullname = bundle.getString("userFullName");
+            uphone = bundle.getString("userPhoneNumber");
+            uemail = bundle.getString("userEmail");
 
-            userName.setText(aname);
-            userEmail.setText(aemail);
+            userName.setText(uname);
+            userFullName.setText(ufullname);
+            phone.setText(uphone);
+            userEmail.setText(uemail);
+
             userPassword.setVisibility(View.GONE);
         } else {
             registerUser.setText("Add");
@@ -89,23 +101,32 @@ public class StudentAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundle1 = getIntent().getExtras();
                 if (bundle1 != null) {
-                    String id = aid;
+                    String id = uid;
                     String name = userName.getText().toString();
+                    String fullname = userFullName.getText().toString();
+                    String phone = String.valueOf(uphone);
                     String email = userEmail.getText().toString();
 
-                    updateStudent(id, name, email);
+                    updateStudent(id, name, fullname, phone, email);
                 }else {
                     if (userName.getText().toString().isEmpty()) {
                         userName.setError("Please enter username");
                         return;
-                    } if (userPassword.getText().toString().isEmpty() || userPassword.getText().toString().length() <= 7) {
+                    } if (userFullName.getText().toString().isEmpty()) {
+                        userFullName.setError("Please enter the full name");
+                        return;
+                    } if (phone.getText().toString().isEmpty()) {
+                        phone.setError("Please enter phone number");
+                        return;
+                    }if (userPassword.getText().toString().isEmpty() || userPassword.getText().toString().length() <= 7) {
                         userPassword.setError("Password should not be empty and more than 7");
                         return;
                     } if (userEmail.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(userEmail.getText().toString()).matches()) {
                         userEmail.setError("Invalid email");
                         return;
                     }
-                    addUser(userName.getText().toString(), userEmail.getText().toString(), userPassword.getText().toString());
+                    addUser(userName.getText().toString(), userFullName.getText().toString(), phone.getText().toString(),
+                            userEmail.getText().toString(), userPassword.getText().toString());
                 }
 
             }
@@ -115,21 +136,23 @@ public class StudentAddActivity extends AppCompatActivity {
 
     }
 
-    private void updateStudent(String id, String name, String email) {
+    private void updateStudent(String id, String name, String fullname, String phone, String email) {
         progressDialog.show();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.updateEmail(email);
 
-        firestore.collection("Users").document(id).update("name", name, "email", email)
+        firestore.collection("Users").document(id).update("username", name, "fullname", fullname,
+                        "phone", phone, "email", email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
                         HashMap<String, Object> result = new HashMap<>();
-                        result.put("name", name);
+                        result.put("username", name);
+                        result.put("fullname", fullname);
+                        result.put("phone", phone);
                         result.put("email", email);
-
                         databaseReference.child(id).updateChildren(result).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -159,7 +182,7 @@ public class StudentAddActivity extends AppCompatActivity {
     }
 
 
-    private void addUser(String name, String email, String password) {
+    private void addUser(String username, String fullname, String phone, String email, String password) {
         progressDialog.show();
         firebaseAuth.createUserWithEmailAndPassword(userEmail.getText().toString(), userPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
@@ -172,8 +195,10 @@ public class StudentAddActivity extends AppCompatActivity {
 
                 Map<String, Object> student_data = new HashMap<>();
                 student_data.put("uid", uid);
+                student_data.put("username", username);
+                student_data.put("fullname", fullname);
+                student_data.put("phone", phone);
                 student_data.put("email", email);
-                student_data.put("name", name);
                 student_data.put("user", "yes");
                 student_data.put("score", "0");
 
@@ -183,9 +208,11 @@ public class StudentAddActivity extends AppCompatActivity {
                 assert firebaseUsers != null;
                 String uids = firebaseUsers.getUid();
                 HashMap<Object, String> hashMap = new HashMap<>();
-                hashMap.put("email", email);
-                hashMap.put("name", name);
                 hashMap.put("uid", uids);
+                hashMap.put("username", username);
+                hashMap.put("fullname", fullname);
+                hashMap.put("phone", phone);
+                hashMap.put("email", email);
                 hashMap.put("user", "yes");
                 hashMap.put("image", "");
 

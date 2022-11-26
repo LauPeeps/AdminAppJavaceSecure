@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +40,7 @@ public class AdminAddActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
     EditText adminName, adminEmail, adminPassword;
+    TextView registerText;
     Button registerAdmin;
     String aid, aname, aemail;
 
@@ -48,11 +50,12 @@ public class AdminAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_add);
 
 
-        adminName = findViewById(R.id.adminName);
+        adminName = findViewById(R.id.adminUsername);
         adminEmail = findViewById(R.id.adminEmail);
         adminPassword = findViewById(R.id.adminPassword);
-        registerAdmin = findViewById(R.id.registerAdmin);
+        registerAdmin = findViewById(R.id.adminRegBtn);
 
+        registerText = findViewById(R.id.registerText);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -67,6 +70,7 @@ public class AdminAddActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
+            registerText.setText("Update Admin");
             registerAdmin.setText("Update");
             aid = bundle.getString("aid");
             aname = bundle.getString("aname");
@@ -76,7 +80,7 @@ public class AdminAddActivity extends AppCompatActivity {
             adminEmail.setText(aemail);
             adminPassword.setVisibility(View.GONE);
         } else {
-            registerAdmin.setText("Add");
+            registerAdmin.setText("Register");
         }
 
         registerAdmin.setOnClickListener(new View.OnClickListener() {
@@ -175,13 +179,10 @@ public class AdminAddActivity extends AppCompatActivity {
             });
 
         }
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
-
 }
