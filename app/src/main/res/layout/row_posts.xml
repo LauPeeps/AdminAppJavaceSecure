@@ -30,7 +30,7 @@
                     android:layout_marginRight="12dp"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_person"/>
+                    android:src="@drawable/ic_feedback"/>
 
 
 
