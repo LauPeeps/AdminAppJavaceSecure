@@ -16,21 +16,12 @@ public class ModuleViewholder extends RecyclerView.ViewHolder {
 
     TextView moduleName, modulePreview;
     View view;
-    Dialog editDialog;
-    EditText editModuleName, editModulePreview;
     public ModuleViewholder(@NonNull View itemView) {
         super(itemView);
 
         view = itemView;
 
 
-        editDialog = new Dialog(itemView.getContext());
-        editDialog.setContentView(R.layout.edit_category_page);
-        editDialog.setCancelable(true);
-        editDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        editModuleName = view.findViewById(R.id.addModuleName);
-        editModulePreview = view.findViewById(R.id.addModuleMessage);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

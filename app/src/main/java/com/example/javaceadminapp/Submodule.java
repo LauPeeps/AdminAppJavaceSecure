@@ -73,13 +73,11 @@ public class Submodule extends AppCompatActivity {
         addPage = new Dialog(Submodule.this);
         addPage.setContentView(R.layout.add_submodule_page);
         addPage.setCancelable(true);
-        addPage.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        addPage.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        submoduleName = addPage.findViewById(R.id.addSubmoduleName);
-        subModulePreivew = addPage.findViewById(R.id.addSubmodulePreview);
-        subModulePreivew.setMovementMethod(new ScrollingMovementMethod());
-        submoduleButton = addPage.findViewById(R.id.addSubModuleBtnDialog);
-
+        submoduleName = addPage.findViewById(R.id.subModuleName);
+        subModulePreivew = addPage.findViewById(R.id.subModulePreview);
+        submoduleButton = addPage.findViewById(R.id.addSubmoduleDialogBtn);
 
         recyclerView = findViewById(R.id.submodule_recycler);
         recyclerView.setHasFixedSize(true);
@@ -111,6 +109,7 @@ public class Submodule extends AppCompatActivity {
             }
         });
 
+
         fetchSubmodules();
 
     }
@@ -120,7 +119,6 @@ public class Submodule extends AppCompatActivity {
         super.onResume();
         fetchSubmodules();
     }
-
 
     private void fetchSubmodules() {
 
@@ -190,7 +188,5 @@ public class Submodule extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }

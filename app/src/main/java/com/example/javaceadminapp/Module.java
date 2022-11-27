@@ -55,9 +55,6 @@ public class Module extends AppCompatActivity {
 
 
 
-
-
-
         firestore = FirebaseFirestore.getInstance();
 
         progressDialog = new Dialog(Module.this);
