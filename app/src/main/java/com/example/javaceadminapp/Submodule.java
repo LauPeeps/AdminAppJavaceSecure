@@ -3,6 +3,7 @@ package com.example.javaceadminapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +44,7 @@ public class Submodule extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     SubmoduleAdapter submoduleAdapter;
-    List<String> subId = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,13 @@ public class Submodule extends AppCompatActivity {
         fetchSubmodules();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchSubmodules();
+    }
+
     private void fetchSubmodules() {
 
         progressDialog.show();
@@ -137,16 +145,16 @@ public class Submodule extends AppCompatActivity {
         addPage.dismiss();
         progressDialog.show();
 
-        Map<String, Object> sub_data = new HashMap<>();
-        sub_data.put("submodule" + (submodules + 1) + "_id", name);
-        sub_data.put("submodule" + (submodules + 1) + "_preview", preview);
+        Map<String, Object> sub_data = new ArrayMap<>();
+        sub_data.put("submodule" + String.valueOf(submodules + 1) + "_id", name);
+        sub_data.put("submodule" + String.valueOf(submodules + 1) + "_preview", preview);
         sub_data.put("submodules", submodules + 1);
 
         firestore.collection("Quizzes").document(moduleId).update(sub_data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                Map<String, Object> sub1_data = new HashMap<>();
-               sub1_data.put("QNO", 0);
+               sub1_data.put("QNO", "0");
 
                firestore.collection("Quizzes").document(moduleId).collection(name).document("Question_List").set(sub1_data)
                        .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -155,6 +163,8 @@ public class Submodule extends AppCompatActivity {
                                Map<String, Object> sub2_data = new HashMap<>();
                                sub2_data.put("topic_title", name);
                                sub2_data.put("topic_content", preview);
+
+                               submoduleAdapter.notifyItemInserted(submoduleModelList.size());
 
                                firestore.collection("Quizzes").document(moduleId).collection(name).document("Topic_List")
                                        .set(sub2_data).addOnSuccessListener(new OnSuccessListener<Void>() {

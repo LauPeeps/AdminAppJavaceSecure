@@ -2,6 +2,8 @@ package com.example.javaceadminapp;
 
 import static com.example.javaceadminapp.Category.category_index;
 import static com.example.javaceadminapp.Category.category_list;
+import static com.example.javaceadminapp.Questions.module;
+import static com.example.javaceadminapp.Questions.submodule;
 import static com.example.javaceadminapp.Sets.idOfSets;
 import static com.example.javaceadminapp.Sets.set_index;
 
@@ -119,8 +121,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-            firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                    .collection(idOfSets.get(set_index)).document(questionsModelList.get(position).getQuestion_id())
+            firestore.collection("Quizzes").document(module)
+                    .collection(submodule).document(questionsModelList.get(position).getQuestion_id())
                     .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -134,8 +136,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             }
                             question_doc.put("QNO", String.valueOf(index - 1));
 
-                            firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                                    .collection(idOfSets.get(set_index)).document("Question_List")
+                            firestore.collection("Quizzes").document(module)
+                                    .collection(submodule).document("Question_List")
                                     .set(question_doc)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

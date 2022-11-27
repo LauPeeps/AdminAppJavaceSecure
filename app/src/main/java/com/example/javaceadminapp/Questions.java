@@ -40,6 +40,7 @@ public class Questions extends AppCompatActivity {
     QuestionsAdapter questionsAdapter;
     FirebaseFirestore firestore;
     Dialog progressDialog;
+    static String module, submodule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,9 @@ public class Questions extends AppCompatActivity {
         getSupportActionBar().setTitle("Questions");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle bundle = getIntent().getExtras();
+        module = bundle.getString("module");
+        submodule = bundle.getString("submodule");
 
         recyclerView = findViewById(R.id.questions_recycler);
         addQuestionBtn = findViewById(R.id.addQuestionBtn);
@@ -87,8 +91,8 @@ public class Questions extends AppCompatActivity {
 
         progressDialog.show();
 
-        firestore.collection("Quiz").document(category_list.get(category_index).getId())
-                .collection(idOfSets.get(set_index)).get()
+        firestore.collection("Quizzes").document(module)
+                .collection(submodule).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

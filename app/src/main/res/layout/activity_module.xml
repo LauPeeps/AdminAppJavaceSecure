@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/module_background"
+    android:background="@drawable/backgroundforall"
     tools:context=".Module">
 
     <androidx.appcompat.widget.Toolbar
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="#372488"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,8 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Module"
+        android:textColor="@color/black"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#030525"
+        android:backgroundTint="@color/white"
         />
 
 

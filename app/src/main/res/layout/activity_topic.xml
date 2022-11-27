@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/module_background"
+    android:background="@drawable/backgroundforall"
     tools:context=".TopicActivity">
 
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Title"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             />
 
         <View
@@ -41,7 +41,7 @@
             android:layout_height="400dp"
             android:gravity="start"
             android:text="Content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:padding="8dp"
             android:scrollbars="vertical"
             android:background="@drawable/topic_background"
@@ -52,7 +52,8 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Question"
-            android:backgroundTint="#2B2525"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
             android:layout_gravity="center_horizontal"
             />
 

@@ -44,7 +44,6 @@ public class TopicActivity extends AppCompatActivity {
 
 
 
-        num = set_index;
 
         questionBtn = findViewById(R.id.qBtn);
 
@@ -53,6 +52,8 @@ public class TopicActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(TopicActivity.this, Questions.class);
+                intent.putExtra("module", moduleid);
+                intent.putExtra("submodule", subid);
                 startActivity(intent);
                 finish();
 
@@ -74,7 +75,5 @@ public class TopicActivity extends AppCompatActivity {
         topicContent.setMovementMethod(new ScrollingMovementMethod());
 
     }
-
-
 
 }

@@ -41,6 +41,7 @@ public class Module extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     ModuleAdapter moduleAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,10 @@ public class Module extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Modules");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
 
 
         firestore = FirebaseFirestore.getInstance();

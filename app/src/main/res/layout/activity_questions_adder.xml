@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A1D59B"
+    android:background="@drawable/backgroundforall"
     tools:context=".QuestionsAdderActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/addquestions_toolbar"
-        android:background="#262433"
+        android:background="#372488"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -84,7 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Question"
-        android:backgroundTint="#2B2525"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
