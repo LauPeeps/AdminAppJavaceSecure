@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#201E1E"
+    android:background="@drawable/backgroundforall"
     tools:context=".Student">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="#262433"
+        android:background="#372488"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -39,8 +39,8 @@
         android:padding="16dp"
         android:text="Add Student"
         android:textSize="18sp"
-        android:textColor="#EAE3E3"
-        android:backgroundTint="#2B2525"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

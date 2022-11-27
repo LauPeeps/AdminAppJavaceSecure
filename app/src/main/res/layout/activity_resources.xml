@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#201E1E"
+    android:background="@drawable/backgroundforall"
     tools:context=".Resources">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbars"
-        android:background="#262433"
+        android:background="#372488"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
