@@ -61,25 +61,6 @@ public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleViewholder> 
 
             @Override
             public void onOneLongClick(View view, int position) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(submodule);
-
-                String[] options = {"Update", "Delete", "Change Password"};
-                builder.setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (i == 0) {
-
-
-
-                        } if (i == 1) {
-
-                        }
-                        if (i == 2) {
-
-                        }
-
-                    }
-                }).create().show();
 
             }
         });

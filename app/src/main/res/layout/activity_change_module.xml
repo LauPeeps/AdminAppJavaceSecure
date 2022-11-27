@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/backgroundforall"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ChangeModuleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+
+        >
+        <EditText
+            android:id="@+id/updateModuleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Module Name"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
+            />
+        <EditText
+            android:gravity="start"
+            android:id="@+id/updateModulePreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Module Preview"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:maxLength="50"
+            android:height="100dp"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
+            />
+        <Button
+            android:id="@+id/updateModule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Module"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

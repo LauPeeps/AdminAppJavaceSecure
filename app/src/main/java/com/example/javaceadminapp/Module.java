@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,9 +34,9 @@ import java.util.Objects;
 public class Module extends AppCompatActivity {
 
     FirebaseFirestore firestore;
-    Button showDialog, addBtnDialog;
-    Dialog progressDialog, addPage;
-    EditText moduleName, modulePreview;
+    Button showSomething;
+    Dialog progressDialog;
+
 
     List<ModuleModel> moduleModelList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -70,41 +71,38 @@ public class Module extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        showDialog = findViewById(R.id.addModuleBtn);
+        showSomething = findViewById(R.id.addModuleBtn);
 
-        addPage = new Dialog(Module.this);
-        addPage.setContentView(R.layout.add_module_page);
-        addPage.setCancelable(true);
-        addPage.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        moduleName = addPage.findViewById(R.id.addModuleName);
-        modulePreview = addPage.findViewById(R.id.addModuleMessage);
-        addBtnDialog = addPage.findViewById(R.id.addModuleBtnDialog);
-
-        showDialog.setOnClickListener(new View.OnClickListener() {
+        showSomething.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                moduleName.getText().clear();
-                modulePreview.getText().clear();
-                addPage.show();
+                startActivity(new Intent(Module.this, ChangeModuleActivity.class));
+                finish();
             }
         });
 
-        addBtnDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (moduleName.getText().toString().isEmpty()) {
-                    moduleName.setError("Please enter module name");
-                    return;
-                } if (modulePreview.getText().toString().isEmpty()) {
-                    modulePreview.setError("Please enter module message");
-                    return;
-                }
-                addModule(moduleName.getText().toString(), modulePreview.getText().toString());
-            }
-        });
+
 
         fetchModules();
+
+    }
+    void deleteModule(int index) {
+        progressDialog.show();
+
+        firestore.collection("Quizzes").document(moduleModelList.get(index).getModule_id()).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Module.this, "Module deleted", Toast.LENGTH_SHORT).show();
+                        fetchModules();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Module.this, "Unable to delete module", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 
@@ -139,34 +137,6 @@ public class Module extends AppCompatActivity {
 
     }
 
-    private void addModule(String moduleName, String modulePreview) {
-        addPage.dismiss();
-        progressDialog.show();
-
-        String document_id = firestore.collection("Quizzes").document().getId();
-        Map<String, Object> module_data = new HashMap<>();
-        module_data.put("module_id", document_id);
-        module_data.put("module_name", moduleName);
-        module_data.put("module_message", modulePreview);
-        module_data.put("module_created", FieldValue.serverTimestamp());
-        module_data.put("submodules", 0);
-
-
-        firestore.collection("Quizzes").document(document_id).set(module_data).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                fetchModules();
-                progressDialog.dismiss();
-                Toast.makeText(Module.this, "Successfully added " + moduleName + " module", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(Module.this, "Failed to add module", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -101,4 +101,6 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminViewholder> {
     public int getItemCount() {
         return adminModelList.size();
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.javaceadminapp;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,21 +63,25 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleViewholder> {
             public void onOneLongClick(View view, int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(module);
 
-                String[] options = {"Update", "Delete", "Change Password"};
+                String[] options = {"Update", "Delete"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
+                            String moduleId = moduleModelList.get(position).getModule_id();
+                            String moduleName = moduleModelList.get(position).getModule_name();
+                            String modulePreview = moduleModelList.get(position).getModule_preview();
 
+                            Intent intent = new Intent(module, ChangeModuleActivity.class);
+                            intent.putExtra("moduleid", moduleId);
+                            intent.putExtra("modulename", moduleName);
+                            intent.putExtra("modulepreview", modulePreview);
 
+                            module.startActivity(intent);
 
                         } if (i == 1) {
-
+                            module.deleteModule(position);
                         }
-                        if (i == 2) {
-
-                        }
-
                     }
                 }).create().show();
 
@@ -93,6 +98,7 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleViewholder> {
     public void onBindViewHolder(@NonNull ModuleViewholder holder, int position) {
         holder.moduleName.setText(moduleModelList.get(position).getModule_name());
         holder.modulePreview.setText(moduleModelList.get(position).getModule_preview());
+
     }
 
     @Override
