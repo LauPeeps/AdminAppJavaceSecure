@@ -1,12 +1,9 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Category.category_index;
-import static com.example.javaceadminapp.Category.category_list;
 import static com.example.javaceadminapp.Questions.module;
 import static com.example.javaceadminapp.Questions.questionsModelList;
 import static com.example.javaceadminapp.Questions.submodule;
-import static com.example.javaceadminapp.Sets.idOfSets;
-import static com.example.javaceadminapp.Sets.set_index;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

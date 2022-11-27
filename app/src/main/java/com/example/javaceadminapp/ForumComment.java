@@ -226,7 +226,7 @@ public class ForumComment extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    myname = dataSnapshot1.child("name").getValue().toString();
+                    myname = dataSnapshot1.child("username").getValue().toString();
                     mydp = dataSnapshot1.child("image").getValue().toString();
                     try {
                         Glide.with(ForumComment.this).load(mydp).into(imageInComment);
@@ -255,7 +255,7 @@ public class ForumComment extends AppCompatActivity {
                     String commentExist = dataSnapshot1.child("comments").getValue().toString();
                     String description = dataSnapshot1.child("description").getValue().toString();
                     String likes = dataSnapshot1.child("likes").getValue().toString();
-                    String name = dataSnapshot1.child("name").getValue().toString();
+                    String name = dataSnapshot1.child("username").getValue().toString();
                     String timePosted = dataSnapshot1.child("timePosted").getValue().toString();
                     String title = dataSnapshot1.child("title").getValue().toString();
                     String userImage = dataSnapshot1.child("userImage").getValue().toString();

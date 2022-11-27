@@ -1,11 +1,8 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Category.category_index;
-import static com.example.javaceadminapp.Category.category_list;
 import static com.example.javaceadminapp.Questions.module;
 import static com.example.javaceadminapp.Questions.submodule;
-import static com.example.javaceadminapp.Sets.idOfSets;
-import static com.example.javaceadminapp.Sets.set_index;
+
 
 import android.app.AlertDialog;
 import android.app.Dialog;

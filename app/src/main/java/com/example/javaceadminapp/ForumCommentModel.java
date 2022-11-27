@@ -5,17 +5,17 @@ public class ForumCommentModel {
     public ForumCommentModel() {}
 
 
-    String commentId, timePosted, commenter, comment, uid, email, name;
+    String commentId, timePosted, commenter, comment, uid, email, username;
 
 
-    public ForumCommentModel(String commentId, String timePosted, String commenter, String comment, String uid, String email, String name) {
+    public ForumCommentModel(String commentId, String timePosted, String commenter, String comment, String uid, String email, String username) {
         this.commentId = commentId;
         this.timePosted = timePosted;
         this.commenter = commenter;
         this.comment = comment;
         this.uid = uid;
         this.email = email;
-        this.name = name;
+        this.username = username;
     }
 
     public String getCommentId() {
@@ -66,11 +66,11 @@ public class ForumCommentModel {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

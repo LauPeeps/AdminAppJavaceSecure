@@ -66,7 +66,7 @@ public class ForumAdapter extends RecyclerView.Adapter<com.example.javaceadminap
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, @SuppressLint("RecyclerView") final int position) {
         String image = modelPosts.get(position).getImage();
-        String names = modelPosts.get(position).getName();
+        String names = modelPosts.get(position).getUsername();
         String uid = modelPosts.get(position).getUid();
         String title = modelPosts.get(position).getTitle();
         String description = modelPosts.get(position).getDescription();
@@ -90,7 +90,7 @@ public class ForumAdapter extends RecyclerView.Adapter<com.example.javaceadminap
         holder.profilePic.setVisibility(View.VISIBLE);
 
         try{
-            Glide.with(context).load(userImage).into(holder.profilePic);
+            Glide.with(context).load(image).into(holder.profilePic);
         } catch (Exception e) {
 
         }

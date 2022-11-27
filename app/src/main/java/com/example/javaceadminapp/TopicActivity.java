@@ -1,10 +1,5 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Category.category_index;
-import static com.example.javaceadminapp.Category.category_list;
-import static com.example.javaceadminapp.Sets.idOfSets;
-import static com.example.javaceadminapp.Sets.set_index;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

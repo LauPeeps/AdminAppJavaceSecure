@@ -1,9 +1,5 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Category.category_index;
-import static com.example.javaceadminapp.Category.category_list;
-import static com.example.javaceadminapp.Sets.idOfSets;
-import static com.example.javaceadminapp.Sets.set_index;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,10 +72,7 @@ public class Questions extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        SpacingForItem itemDecorator = new SpacingForItem(15);
-        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         firestore = FirebaseFirestore.getInstance();
 
         fetchQuestions();
