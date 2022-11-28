@@ -34,7 +34,6 @@
             android:hint="Submodule Preview"
             android:inputType="textMultiLine"
             android:scrollbars="vertical"
-            android:maxLength="100"
             android:height="100dp"
             android:padding="10dp"
             android:background="@drawable/modern_pdf_input"

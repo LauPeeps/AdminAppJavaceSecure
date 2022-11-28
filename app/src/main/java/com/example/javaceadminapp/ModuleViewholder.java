@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ModuleViewholder extends RecyclerView.ViewHolder {
 
-    TextView moduleName, modulePreview;
+    TextView moduleName;
     View view;
     public ModuleViewholder(@NonNull View itemView) {
         super(itemView);
@@ -38,7 +38,6 @@ public class ModuleViewholder extends RecyclerView.ViewHolder {
             }
         });
         moduleName = itemView.findViewById(R.id.moduleName);
-        modulePreview = itemView.findViewById(R.id.modulePreview);
 
     }
 

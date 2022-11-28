@@ -27,21 +27,7 @@
             android:textColorHint="@color/white"
             android:layout_marginBottom="12dp"
             />
-        <EditText
-            android:gravity="start"
-            android:id="@+id/updateModulePreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Module Preview"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:maxLength="100"
-            android:height="100dp"
-            android:padding="10dp"
-            android:background="@drawable/modern_pdf_input"
-            android:textColorHint="@color/white"
-            android:layout_marginBottom="12dp"
-            />
+
         <Button
             android:id="@+id/updateModule"
             android:layout_width="match_parent"

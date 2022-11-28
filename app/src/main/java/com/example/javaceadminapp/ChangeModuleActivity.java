@@ -49,8 +49,7 @@ public class ChangeModuleActivity extends AppCompatActivity {
 
 
         etModuleName = findViewById(R.id.updateModuleName);
-        etModulePreview = findViewById(R.id.updateModulePreview);
-        etModulePreview.setMovementMethod(new ScrollingMovementMethod());
+
 
         updateBtn = findViewById(R.id.updateModule);
 
@@ -60,9 +59,7 @@ public class ChangeModuleActivity extends AppCompatActivity {
         if (bundle != null) {
             moduleId = bundle.getString("moduleid");
             moduleName = bundle.getString("modulename");
-            modulePreview = bundle.getString("modulepreview");
             etModuleName.setText(moduleName);
-            etModulePreview.setText(modulePreview);
 
             updateBtn.setText("Update Module");
         } else {
@@ -77,32 +74,27 @@ public class ChangeModuleActivity extends AppCompatActivity {
                 if (bundle1 != null) {
                     String mid = moduleId;
                     String mname = etModuleName.getText().toString();
-                    String mpreview = etModulePreview.getText().toString();
 
-                    updateModule(mid, mname, mpreview);
+                    updateModule(mid, mname);
                 } else {
                     if (etModuleName.getText().toString().isEmpty()) {
                         etModuleName.setError("Please enter module name");
                         return;
-                    } if (etModulePreview.getText().toString().isEmpty()) {
-                        etModulePreview.setError("Please enter module preview");
-                        return;
                     }
-                    addModule(etModuleName.getText().toString(), etModulePreview.getText().toString());
+                    addModule(etModuleName.getText().toString());
                 }
             }
         });
 
 
     }
-    private void addModule(String moduleName, String modulePreview) {
+    private void addModule(String moduleName) {
         progressDialog.show();
 
         String document_id = firestore.collection("Quizzes").document().getId();
         Map<String, Object> module_data = new HashMap<>();
         module_data.put("module_id", document_id);
         module_data.put("module_name", moduleName);
-        module_data.put("module_message", modulePreview);
         module_data.put("module_created", FieldValue.serverTimestamp());
         module_data.put("submodules", 0);
 
@@ -124,10 +116,10 @@ public class ChangeModuleActivity extends AppCompatActivity {
         });
     }
 
-    private void updateModule(String id, String name, String email) {
+    private void updateModule(String id, String name) {
         progressDialog.show();
 
-        firestore.collection("Quizzes").document(id).update("module_name", name, "module_message", email)
+        firestore.collection("Quizzes").document(id).update("module_name", name)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

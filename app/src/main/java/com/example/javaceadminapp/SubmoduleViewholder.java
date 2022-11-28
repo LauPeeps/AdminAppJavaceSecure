@@ -31,7 +31,6 @@ public class SubmoduleViewholder extends RecyclerView.ViewHolder {
             }
         });
         subModuleName = itemView.findViewById(R.id.moduleName);
-        subModulePreview = itemView.findViewById(R.id.modulePreview);
 
     }
     private SubmoduleViewholder.ListenerClicker listenerClicker;

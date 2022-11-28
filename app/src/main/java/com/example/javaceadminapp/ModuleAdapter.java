@@ -70,12 +70,10 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleViewholder> {
                         if (i == 0) {
                             String moduleId = moduleModelList.get(position).getModule_id();
                             String moduleName = moduleModelList.get(position).getModule_name();
-                            String modulePreview = moduleModelList.get(position).getModule_preview();
 
                             Intent intent = new Intent(module, ChangeModuleActivity.class);
                             intent.putExtra("moduleid", moduleId);
                             intent.putExtra("modulename", moduleName);
-                            intent.putExtra("modulepreview", modulePreview);
 
                             module.startActivity(intent);
 
@@ -97,7 +95,6 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleViewholder> {
     @Override
     public void onBindViewHolder(@NonNull ModuleViewholder holder, int position) {
         holder.moduleName.setText(moduleModelList.get(position).getModule_name());
-        holder.modulePreview.setText(moduleModelList.get(position).getModule_preview());
 
     }
 
