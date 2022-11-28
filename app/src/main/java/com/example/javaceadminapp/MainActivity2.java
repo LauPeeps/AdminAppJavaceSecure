@@ -50,7 +50,7 @@ public class MainActivity2 extends AppCompatActivity{
         imgStudents = findViewById(R.id.goToStudents);
         imgQuiz = findViewById(R.id.goToQuiz);
         imgResources = findViewById(R.id.goToResources);
-        imgExercises = findViewById(R.id.goToExercises);
+        imgExercises = findViewById(R.id.goToLeaderboard);
         imgFeedback = findViewById(R.id.goToFeedback);
         imgForum = findViewById(R.id.goToForum);
 
@@ -87,7 +87,7 @@ public class MainActivity2 extends AppCompatActivity{
         imgExercises.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirectActivity(MainActivity2.this, ExerciseActivity.class);
+                redirectActivity(MainActivity2.this, Leaderboard.class);
 
             }
         });

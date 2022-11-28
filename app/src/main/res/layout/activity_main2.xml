@@ -231,15 +231,15 @@
                     android:layout_gravity="center"
                     >
                     <ImageView
-                        android:id="@+id/goToExercises"
+                        android:id="@+id/goToLeaderboard"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/img_code_exercises"/>
+                        android:background="@drawable/img_trophy"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Exercises"
+                        android:text="Leaderboard"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
 
