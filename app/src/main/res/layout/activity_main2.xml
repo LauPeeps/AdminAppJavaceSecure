@@ -43,22 +43,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-
-            <TextView
-            android:id="@+id/adminName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Admin"
-            android:textSize="21dp"
-            android:textColor="@color/black"
-            />
             <TextView
                 android:id="@+id/uniqueMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome back"
+                android:text="Welcome"
                 android:textColor="@color/teal_200"
-                android:textSize="18dp"/>
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/adminName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                />
 
         </LinearLayout>
 
@@ -171,7 +171,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Quiz"
+                        android:text="Module"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
 

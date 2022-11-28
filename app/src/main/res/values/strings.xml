@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JavaceAdminApp</string>
+    <string name="app_name">Javace Admin</string>
     <string name="navigation_drawer_open">open navigation</string>
     <string name="navigation_drawer_close">close navigation</string>
     <string name="title_activity_forum_creation">ForumCreation</string>
