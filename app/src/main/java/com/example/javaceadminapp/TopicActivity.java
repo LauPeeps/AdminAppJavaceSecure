@@ -36,7 +36,6 @@ public class TopicActivity extends AppCompatActivity {
 
 
         subid = bundle.getString("subid");
-        subname = bundle.getString("subname");
         moduleid = bundle.getString("moduleid");
 
         topicTitle = findViewById(R.id.topicTitle);

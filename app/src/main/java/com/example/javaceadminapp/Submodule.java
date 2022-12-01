@@ -157,7 +157,9 @@ public class Submodule extends AppCompatActivity {
                                firestore.collection("Quizzes").document(moduleId).collection(name).document("Quiz_Taker").set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                    @Override
                                    public void onSuccess(Void unused) {
-
+                                       Map<String, Object> data = new HashMap<>();
+                                       data.put("topic_exist", 0);
+                                       firestore.collection("Quizzes").document(moduleId).collection(name).document("Topic_List").set(data);
                                    }
                                });
                                submoduleAdapter.notifyItemInserted(submoduleModelList.size());
