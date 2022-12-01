@@ -47,12 +47,10 @@ public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleViewholder> 
             @Override
             public void onOneClick(View view, int position) {
                 String subId = submoduleModelList.get(position).getSubmodule_id();
-                String subName = submoduleModelList.get(position).getSubmodule_preview();
                 String moduleId = submodule.moduleId;
 
                 Intent intent = new Intent(submodule, TopicActivity.class);
                 intent.putExtra("subid", subId);
-                intent.putExtra("subname", subName);
                 intent.putExtra("moduleid", moduleId);
 
                 submodule.startActivity(intent);

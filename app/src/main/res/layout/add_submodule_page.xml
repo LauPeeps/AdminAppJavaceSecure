@@ -6,7 +6,8 @@
     android:layout_gravity="center_horizontal"
     android:background="@drawable/backgroundforall"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".ChangeModuleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
 
         >
         <EditText
-            android:id="@+id/subModuleName"
+            android:id="@+id/submodule_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Submodule Name"
@@ -26,22 +27,9 @@
             android:textColorHint="@color/white"
             android:layout_marginBottom="12dp"
             />
-        <EditText
-            android:gravity="start"
-            android:id="@+id/subModulePreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Submodule Preview"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:height="100dp"
-            android:padding="10dp"
-            android:background="@drawable/modern_pdf_input"
-            android:textColorHint="@color/white"
-            android:layout_marginBottom="12dp"
-            />
+
         <Button
-            android:id="@+id/addSubmoduleDialogBtn"
+            android:id="@+id/add_submodule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Submodule"

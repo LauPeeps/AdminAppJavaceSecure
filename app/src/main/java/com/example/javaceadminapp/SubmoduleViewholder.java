@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SubmoduleViewholder extends RecyclerView.ViewHolder {
 
-    TextView subModuleName, subModulePreview;
+    TextView subModuleName;
     View view;
 
     public SubmoduleViewholder(@NonNull View itemView) {

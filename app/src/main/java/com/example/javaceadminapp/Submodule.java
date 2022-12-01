@@ -75,9 +75,8 @@ public class Submodule extends AppCompatActivity {
         addPage.setCancelable(true);
         addPage.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        submoduleName = addPage.findViewById(R.id.subModuleName);
-        subModulePreivew = addPage.findViewById(R.id.subModulePreview);
-        submoduleButton = addPage.findViewById(R.id.addSubmoduleDialogBtn);
+        submoduleName = addPage.findViewById(R.id.submodule_name);
+        submoduleButton = addPage.findViewById(R.id.add_submodule);
 
         recyclerView = findViewById(R.id.submodule_recycler);
         recyclerView.setHasFixedSize(true);
@@ -90,7 +89,6 @@ public class Submodule extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 submoduleName.getText().clear();
-                subModulePreivew.getText().clear();
                 addPage.show();
             }
         });
@@ -101,11 +99,8 @@ public class Submodule extends AppCompatActivity {
                 if (submoduleName.getText().toString().isEmpty()) {
                     submoduleName.setError("Please enter submodule name");
                     return;
-                } if (subModulePreivew.getText().toString().isEmpty()) {
-                    subModulePreivew.setError("Please enter submodule preview");
-                    return;
                 }
-                addSubmodule(submoduleName.getText().toString(), subModulePreivew.getText().toString());
+                addSubmodule(submoduleName.getText().toString());
             }
         });
 
@@ -129,8 +124,7 @@ public class Submodule extends AppCompatActivity {
                 submoduleModelList.clear();
                 long existingSubs = documentSnapshot.getLong("submodules");
                 for (int i  = 1; i <= existingSubs; i++) {
-                    SubmoduleModel submoduleModel = new SubmoduleModel(documentSnapshot.getString("submodule" + String.valueOf(i) + "_id"),
-                            documentSnapshot.getString("submodule" + String.valueOf(i) + "_preview"));
+                    SubmoduleModel submoduleModel = new SubmoduleModel(documentSnapshot.getString("submodule" + String.valueOf(i) + "_id"));
                     submoduleModelList.add(submoduleModel);
                 }
                 progressDialog.dismiss();
@@ -140,13 +134,12 @@ public class Submodule extends AppCompatActivity {
         });
     }
 
-    private void addSubmodule(String name, String preview) {
+    private void addSubmodule(String name) {
         addPage.dismiss();
         progressDialog.show();
 
         Map<String, Object> sub_data = new ArrayMap<>();
         sub_data.put("submodule" + String.valueOf(submodules + 1) + "_id", name);
-        sub_data.put("submodule" + String.valueOf(submodules + 1) + "_preview", preview);
         sub_data.put("submodules", submodules + 1);
 
         firestore.collection("Quizzes").document(moduleId).update(sub_data).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -159,21 +152,20 @@ public class Submodule extends AppCompatActivity {
                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                            @Override
                            public void onSuccess(Void unused) {
-                               Map<String, Object> sub2_data = new HashMap<>();
-                               sub2_data.put("topic_title", name);
-                               sub2_data.put("topic_content", preview);
+                               Map<String, Object> data = new HashMap<>();
+                               data.put("quizzer", "0");
+                               firestore.collection("Quizzes").document(moduleId).collection(name).document("Quiz_Taker").set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                   @Override
+                                   public void onSuccess(Void unused) {
 
+                                   }
+                               });
                                submoduleAdapter.notifyItemInserted(submoduleModelList.size());
+                               progressDialog.dismiss();
+                               Toast.makeText(Submodule.this, "Submodule added successfully", Toast.LENGTH_SHORT).show();
+                               fetchSubmodules();
 
-                               firestore.collection("Quizzes").document(moduleId).collection(name).document("Topic_List")
-                                       .set(sub2_data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                           @Override
-                                           public void onSuccess(Void unused) {
-                                               progressDialog.dismiss();
-                                               Toast.makeText(Submodule.this, "Submodule added successfully", Toast.LENGTH_SHORT).show();
-                                               fetchSubmodules();
-                                           }
-                                       });
+
                            }
                        });
             }
