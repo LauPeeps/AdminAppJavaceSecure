@@ -8,64 +8,13 @@
     tools:context=".TopicActivity">
 
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:orientation="vertical"
-        >
+        android:layout_height="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="#372488"
+        />
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:id="@+id/topicTitle"
-            android:textSize="31dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Title"
-            android:textColor="@color/black"
-            />
-
-        <View
-            android:layout_margin="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#7F86A5"
-
-            />
-
-        <TextView
-            android:textSize="16dp"
-            android:layout_margin="10dp"
-            android:id="@+id/topicContent"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:gravity="start"
-            android:text="Content"
-            android:textColor="@color/black"
-            android:padding="8dp"
-            android:scrollbars="vertical"
-            android:background="@drawable/topic_background"
-            />
-        <Button
-            android:id="@+id/qBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Question"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="center_horizontal"
-            />
-        <Button
-            android:id="@+id/showEditDialog"
-            android:layout_marginTop="2dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="center_horizontal"
-            />
-
-    </LinearLayout>
 
 </LinearLayout>
