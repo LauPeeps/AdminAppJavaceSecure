@@ -15,10 +15,10 @@
         />
 
     <Button
-        android:id="@+id/addUrlVideo"
+        android:id="@+id/showAddDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Module"
+        android:text="Add Video"
         android:textColor="@color/black"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/white"

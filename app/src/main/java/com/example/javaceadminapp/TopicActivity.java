@@ -33,7 +33,6 @@ import java.util.Objects;
 public class TopicActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
-    String subid, moduleid;
     Dialog progressDialog;
 
 
@@ -43,6 +42,7 @@ public class TopicActivity extends AppCompatActivity {
     TopicAdapter topicAdapter;
     Button addTopicBtn, dialogAddTopicBtn;
     Dialog addPage;
+    static String subidfromtopicactivity, moduleidfromtopicactivity;
 
     EditText titleOfTopic, contentOfContent;
 
@@ -52,8 +52,8 @@ public class TopicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_topic);
 
         Bundle bundle = getIntent().getExtras();
-        subid = bundle.getString("subid");
-        moduleid = bundle.getString("moduleid");
+        subidfromtopicactivity = bundle.getString("subid");
+        moduleidfromtopicactivity = bundle.getString("moduleid");
 
         firestore = FirebaseFirestore.getInstance();
 
@@ -116,7 +116,7 @@ public class TopicActivity extends AppCompatActivity {
     private void fetchTopics() {
         progressDialog.show();
 
-        firestore.collection("Quizzes").document(moduleid).collection(subid).document("Topic_List").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Topic_List").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 topicModelList.clear();
@@ -142,7 +142,7 @@ public class TopicActivity extends AppCompatActivity {
         addPage.dismiss();
         progressDialog.show();
 
-        DocumentReference  documentReference = firestore.collection("Quizzes").document(moduleid).collection(subid).document("Topic_List");
+        DocumentReference  documentReference = firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Topic_List");
 
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -150,7 +150,7 @@ public class TopicActivity extends AppCompatActivity {
                 Long howMany = documentSnapshot.getLong("topic_exist");
                 Map<String, Object> data = new HashMap<>();
                 data.put("topic" + String.valueOf(howMany + 1) + "_title", titleOf);
-                data.put("topic" + String.valueOf(howMany + 1) + "_content", titleOf);
+                data.put("topic" + String.valueOf(howMany + 1) + "_content", contentOf);
                 data.put("topic_exist", howMany + 1);
 
                 documentReference.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
