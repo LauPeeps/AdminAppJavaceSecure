@@ -204,7 +204,7 @@ public class QuestionsAdderActivity extends AppCompatActivity {
         question_data.put("D", option4Str);
         question_data.put("Correct", answerStr);
 
-        firestore.collection("Quiz").document(module)
+        firestore.collection("Quizzes").document(module)
                 .collection(submodule).document(questionsModelList.get(question_id).getQuestion_id())
                 .set(question_data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
