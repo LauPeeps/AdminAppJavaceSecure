@@ -46,7 +46,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewholder> {
         topicViewholder.setOnClickListener(new TopicViewholder.ListenerClicker() {
             @Override
             public void onOneClick(View view, int position) {
+                Intent intent = new Intent(topicActivity, VideoActivity.class);
 
+                intent.putExtra("subid", topicActivity.subid);
+                intent.putExtra("moduleid", topicActivity.moduleid);
+
+                topicActivity.startActivity(intent);
 
             }
 
