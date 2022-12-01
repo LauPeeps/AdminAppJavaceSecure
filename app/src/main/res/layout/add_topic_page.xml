@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B3B9D5"
-    android:orientation="vertical" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/backgroundforall"
+    android:orientation="vertical"
+    android:gravity="start">
 
     <LinearLayout
-        android:id="@+id/layButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:padding="6dp"
-        android:orientation="vertical" >
-
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_marginTop="21dp"
+        >
         <EditText
-            android:id="@+id/titleText"
+            android:id="@+id/topic_name_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="100dp"
-            android:hint="Topic title"
-            android:textCursorDrawable="@drawable/text_cursor"
+            android:hint="Topic Name"
             android:inputType="textPersonName"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
             />
 
         <EditText
-
-            android:id="@+id/titleContent"
+            android:id="@+id/topic_content_dialog"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:hint="Topic content"
-            android:maxLines="15"
+            android:layout_height="400dp"
+            android:hint="Topic Content"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:background="@drawable/modern_pdf_input"
+            android:textColorHint="@color/white"
+            android:layout_marginBottom="12dp"
             android:gravity="start"
-            android:height="400dp"
-            android:padding="8dp"
-            android:textCursorDrawable="@drawable/text_cursor"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/topic_background"
+            android:scrollbars="vertical"
             />
 
 
-            <Button
-                android:layout_gravity="center"
-                android:id="@+id/addTopicBtn"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Add Topic"
-                android:backgroundTint="#2B2525"
-
-                />
+        <Button
+            android:layout_marginTop="25dp"
+            android:id="@+id/addTopicDialogBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Topic"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:scrollbars="vertical"
+            />
 
     </LinearLayout>
-</LinearLayout>
+
+
+
+</RelativeLayout>
