@@ -68,7 +68,30 @@ public class ExerciseActivity extends AppCompatActivity {
         showAddExerciseActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ExerciseActivity.this, ExerciseAddActivity.class));
+                firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Exercise_List").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            Intent intent = new Intent(ExerciseActivity.this, ExerciseAddActivity.class);
+                            String title = documentSnapshot.getString("exercise_title");
+                            String instruction = documentSnapshot.getString("exercise_instruction");
+                            String problem = documentSnapshot.getString("exercise_problem");
+                            String answerCode1 = documentSnapshot.getString("answer1");
+                            String answerCode2 = documentSnapshot.getString("answer2");
+                            String answerCode3 = documentSnapshot.getString("answer3");
+
+                            intent.putExtra("title", title);
+                            intent.putExtra("instruction", instruction);
+                            intent.putExtra("problem", problem);
+                            intent.putExtra("answerCode1", answerCode1);
+                            intent.putExtra("answerCode2", answerCode2);
+                            intent.putExtra("answerCode3", answerCode3);
+                            startActivity(intent);
+                        } else {
+                            startActivity(new Intent(ExerciseActivity.this, ExerciseAddActivity.class));
+                        }
+                    }
+                });
             }
         });
 
