@@ -34,7 +34,7 @@ import java.util.Map;
 public class Questions extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    Button addQuestionBtn;
+    Button addQuestionBtn, goToExerciseBtn;
     public static List<QuestionsModel> questionsModelList = new ArrayList<>();
     QuestionsAdapter questionsAdapter;
     FirebaseFirestore firestore;
@@ -76,6 +76,15 @@ public class Questions extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         fetchQuestions();
+
+        goToExerciseBtn = findViewById(R.id.go_to_exercise);
+
+        goToExerciseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Questions.this, ExerciseActivity.class));
+            }
+        });
     }
 
 

@@ -24,15 +24,31 @@
 
         />
 
-    <Button
-        android:id="@+id/addQuestionBtn"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Question"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/white"
-        />
+        >
+        <Button
+            android:id="@+id/addQuestionBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Question"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            />
+        <Button
+            android:id="@+id/go_to_exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exercises"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            />
+    </LinearLayout>
+
 
 
 </RelativeLayout>

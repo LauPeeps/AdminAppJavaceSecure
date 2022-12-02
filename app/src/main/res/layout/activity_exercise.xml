@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundforall"
+    tools:context=".ExerciseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/exercise_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="#372488"
+        />
+
+   <LinearLayout
+       android:id="@+id/layoutForExercises"
+       android:layout_below="@id/exercise_toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       >
+       <TextView
+           android:id="@+id/exerciseTitle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Exercise Title"
+           android:textAlignment="center"
+           android:textSize="21dp"
+           android:textStyle="bold"
+           />
+       <TextView
+           android:id="@+id/exerciseInstruction"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Instruction"
+           android:layout_margin="5dp"
+           android:textSize="17dp"
+           android:padding="4dp"
+           android:scrollbars="vertical"
+           android:maxHeight="100dp"
+           />
+
+       <TextView
+           android:id="@+id/exerciseProblem"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Problem"
+           android:layout_margin="20dp"
+           android:textSize="17dp"
+           android:padding="8dp"
+           android:height="300dp"
+           android:scrollbars="vertical"
+           />
+   </LinearLayout>
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/layoutForExercises"
+        >
+        <TextView
+            android:id="@+id/answer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer 1"
+            android:padding="4dp"
+            android:layout_marginLeft="4dp"
+            android:height="50dp"
+            android:scrollbars="vertical"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B6A7A7"
+            android:layout_marginHorizontal="12dp"
+            />
+        <TextView
+            android:id="@+id/answer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer 2"
+            android:padding="4dp"
+            android:layout_marginLeft="4dp"
+            android:height="50dp"
+            android:scrollbars="vertical"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B6A7A7"
+            android:layout_marginHorizontal="12dp"
+            />
+        <TextView
+            android:id="@+id/answer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer 3"
+            android:padding="4dp"
+            android:layout_marginLeft="4dp"
+            android:height="50dp"
+            android:scrollbars="vertical"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="12dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/showAddExerciseActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Exercise"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
