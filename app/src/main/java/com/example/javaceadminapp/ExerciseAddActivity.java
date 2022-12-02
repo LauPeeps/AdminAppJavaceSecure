@@ -3,6 +3,7 @@ package com.example.javaceadminapp;
 import static com.example.javaceadminapp.TopicActivity.moduleidfromtopicactivity;
 import static com.example.javaceadminapp.TopicActivity.subidfromtopicactivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,6 +11,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -72,6 +74,25 @@ public class ExerciseAddActivity extends AppCompatActivity {
         submitExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (exerciseTitle.getText().toString().isEmpty()) {
+                    exerciseTitle.setError("Please enter exercise title");
+                    return;
+                } if (exerciseInstruction.getText().toString().isEmpty()) {
+                    exerciseInstruction.setError("Please enter exercise instruction");
+                    return;
+                } if (exerciseProblem.getText().toString().isEmpty()) {
+                    exerciseProblem.setError("Please enter exercise problem");
+                    return;
+                } if (answer1.getText().toString().isEmpty()) {
+                    answer1.setError("Please enter correct code 1");
+                    return;
+                } if (answer2.getText().toString().isEmpty()) {
+                    answer2.setError("Please enter correct code 2");
+                    return;
+                } if (answer3.getText().toString().isEmpty()) {
+                    answer3.setError("Please enter correct code 3");
+                    return;
+                }
                 addExercise(exerciseTitle.getText().toString(), exerciseInstruction.getText().toString(), exerciseProblem.getText().toString(), answer1.getText().toString(),
                         answer2.getText().toString(), answer3.getText().toString());
             }
@@ -99,5 +120,13 @@ public class ExerciseAddActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

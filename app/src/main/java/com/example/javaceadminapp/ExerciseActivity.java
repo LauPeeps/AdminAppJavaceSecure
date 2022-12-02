@@ -1,5 +1,8 @@
 package com.example.javaceadminapp;
 
+import static com.example.javaceadminapp.TopicActivity.moduleidfromtopicactivity;
+import static com.example.javaceadminapp.TopicActivity.subidfromtopicactivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,12 +14,18 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class ExerciseActivity extends AppCompatActivity {
 
+    FirebaseFirestore firestore;
     TextView exerciseTitle, exerciseInstruction, exerciseProblem, answer1, answer2, answer3;
     Button showAddExerciseActivity;
     Dialog progressDialog;
@@ -36,6 +45,7 @@ public class ExerciseActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.progressbar_background);
         progressDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         exerciseTitle = findViewById(R.id.exerciseTitle);
         exerciseInstruction = findViewById(R.id.exerciseInstruction);
@@ -62,6 +72,29 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         });
 
+        firestore = FirebaseFirestore.getInstance();
+
+        firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Exercise_List").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                if (documentSnapshot.exists()) {
+                    String title = documentSnapshot.getString("exercise_title");
+                    String instruction = documentSnapshot.getString("exercise_instruction");
+                    String problem = documentSnapshot.getString("exercise_problem");
+                    String answerCode1 = documentSnapshot.getString("answer1");
+                    String answerCode2 = documentSnapshot.getString("answer2");
+                    String answerCode3 = documentSnapshot.getString("answer3");
+
+                    exerciseTitle.setText(title);
+                    exerciseInstruction.setText(instruction);
+                    exerciseProblem.setText(problem);
+                    answer1.setText("Correct code 1 = " + answerCode1);
+                    answer2.setText("Correct code 2 = " + answerCode2);
+                    answer3.setText("Correct code 3 = " + answerCode3);
+                }
+            }
+        });
     }
 
 
