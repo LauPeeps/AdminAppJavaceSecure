@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -62,7 +64,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewholder> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
+                            String title = topicModelList.get(position).getTopic_title();
+                            String content = topicModelList.get(position).getTopic_content();
 
+                            topicActivity.titleOfTopic.setText(title);
+                            topicActivity.contentOfContent.setText(content);
+                            topicActivity.addPage.show();
+
+                            topicActivity.dialogAddTopicBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    topicActivity.updateTopic(position, topicActivity.titleOfTopic.getText().toString(), topicActivity.contentOfContent.getText().toString());
+                                }
+                            });
 
 
                         } if (i == 1) {

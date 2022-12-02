@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -113,6 +114,7 @@ public class TopicActivity extends AppCompatActivity {
 
     }
 
+
     private void fetchTopics() {
         progressDialog.show();
 
@@ -123,7 +125,7 @@ public class TopicActivity extends AppCompatActivity {
                 long existing_topics = documentSnapshot.getLong("topic_exist");
                 for (int i = 1; i <= existing_topics; i++) {
                     TopicModel topicModel = new TopicModel(documentSnapshot.getString("topic" +String.valueOf(i) + "_title"),
-                            documentSnapshot.getString("topic" + String.valueOf(i) + "_name"));
+                            documentSnapshot.getString("topic" + String.valueOf(i) + "_content"));
                     topicModelList.add(topicModel);
                 }
                 progressDialog.dismiss();
@@ -136,6 +138,23 @@ public class TopicActivity extends AppCompatActivity {
                 Toast.makeText(TopicActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void updateTopic(int position, String titleOf, String contentOf) {
+        addPage.dismiss();
+        progressDialog.show();
+
+        DocumentReference  documentReference = firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Topic_List");
+
+        documentReference.update("topic" + String.valueOf(position + 1) + "_title", titleOf, "topic" + String.valueOf(position + 1) + "_content", contentOf).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(TopicActivity.this, "Successfully updated the topic", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                fetchTopics();
+            }
+        });
+
     }
 
     private void addTopic(String titleOf, String contentOf) {
