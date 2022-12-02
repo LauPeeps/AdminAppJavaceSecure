@@ -14,14 +14,29 @@
         android:layout_height="450dp"
         />
 
-    <Button
-        android:id="@+id/showAddDialog"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Video"
-        android:textColor="@color/black"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/white"
-        />
+        >
+        <Button
+            android:id="@+id/showAddDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Video"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            />
+        <Button
+            android:id="@+id/goToQuestionsActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Questions"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            />
+    </LinearLayout>
+
 
 </RelativeLayout>

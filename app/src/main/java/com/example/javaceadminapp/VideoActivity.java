@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class VideoActivity extends AppCompatActivity {
 
-    Button add_url_button, showAddDialog;
+    Button add_url_button, showAddDialog, goToQuestionsActivity;
     Dialog addPage, progressDialog;
     YouTubePlayerView youTubePlayerView;
     EditText video_url;
@@ -56,6 +57,15 @@ public class VideoActivity extends AppCompatActivity {
         add_url_button = addPage.findViewById(R.id.add_url_button);
 
         showAddDialog = findViewById(R.id.showAddDialog);
+        goToQuestionsActivity = findViewById(R.id.goToQuestionsActivity);
+
+        goToQuestionsActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(VideoActivity.this, Questions.class));
+                finish();
+            }
+        });
 
 
 

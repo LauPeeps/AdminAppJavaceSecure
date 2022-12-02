@@ -1,8 +1,8 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Questions.module;
 import static com.example.javaceadminapp.Questions.questionsModelList;
-import static com.example.javaceadminapp.Questions.submodule;
+import static com.example.javaceadminapp.TopicActivity.moduleidfromtopicactivity;
+import static com.example.javaceadminapp.TopicActivity.subidfromtopicactivity;
 
 
 import androidx.annotation.NonNull;
@@ -137,11 +137,11 @@ public class QuestionsAdderActivity extends AppCompatActivity {
         question_data.put("D", option4Str);
         question_data.put("Correct", answerStr);
 
-        String document_id = firestore.collection("Quizzes").document(module)
-                .collection(submodule).document().getId();
+        String document_id = firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                .collection(subidfromtopicactivity).document().getId();
 
-        firestore.collection("Quizzes").document(module)
-                .collection(submodule).document(document_id)
+        firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                .collection(subidfromtopicactivity).document(document_id)
                 .set(question_data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -151,8 +151,8 @@ public class QuestionsAdderActivity extends AppCompatActivity {
                         question_document.put("Q" + String.valueOf(questionsModelList.size() + 1) + "_Id", document_id);
                         question_document.put("QNO", String.valueOf(questionsModelList.size() + 1));
 
-                        firestore.collection("Quizzes").document(module)
-                                .collection(submodule).document("Question_List")
+                        firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                                .collection(subidfromtopicactivity).document("Question_List")
                                 .update(question_document)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -204,8 +204,8 @@ public class QuestionsAdderActivity extends AppCompatActivity {
         question_data.put("D", option4Str);
         question_data.put("Correct", answerStr);
 
-        firestore.collection("Quizzes").document(module)
-                .collection(submodule).document(questionsModelList.get(question_id).getQuestion_id())
+        firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                .collection(subidfromtopicactivity).document(questionsModelList.get(question_id).getQuestion_id())
                 .set(question_data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

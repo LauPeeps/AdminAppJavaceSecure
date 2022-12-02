@@ -1,8 +1,9 @@
 package com.example.javaceadminapp;
 
-import static com.example.javaceadminapp.Questions.module;
-import static com.example.javaceadminapp.Questions.submodule;
 
+
+import static com.example.javaceadminapp.TopicActivity.moduleidfromtopicactivity;
+import static com.example.javaceadminapp.TopicActivity.subidfromtopicactivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -118,8 +119,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-            firestore.collection("Quizzes").document(module)
-                    .collection(submodule).document(questionsModelList.get(position).getQuestion_id())
+            firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                    .collection(subidfromtopicactivity).document(questionsModelList.get(position).getQuestion_id())
                     .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -133,8 +134,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             }
                             question_doc.put("QNO", String.valueOf(index - 1));
 
-                            firestore.collection("Quizzes").document(module)
-                                    .collection(submodule).document("Question_List")
+                            firestore.collection("Quizzes").document(moduleidfromtopicactivity)
+                                    .collection(subidfromtopicactivity).document("Question_List")
                                     .set(question_doc)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
