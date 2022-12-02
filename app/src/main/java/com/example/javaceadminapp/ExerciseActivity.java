@@ -87,8 +87,10 @@ public class ExerciseActivity extends AppCompatActivity {
                             intent.putExtra("answerCode2", answerCode2);
                             intent.putExtra("answerCode3", answerCode3);
                             startActivity(intent);
+                            finish();
                         } else {
                             startActivity(new Intent(ExerciseActivity.this, ExerciseAddActivity.class));
+                            finish();
                         }
                     }
                 });

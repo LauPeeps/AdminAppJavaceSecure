@@ -31,6 +31,7 @@ public class ExerciseAddActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
     Button submitExercise;
     EditText exerciseTitle, exerciseInstruction, exerciseProblem, answer1, answer2, answer3;
+    String exerciseTitleExtra, exerciseInstructionExtra, exerciseProblemExtra, answer1Extra, answer2Extra, answer3Extra;
     Dialog progressDialog;
 
     @Override
@@ -71,30 +72,65 @@ public class ExerciseAddActivity extends AppCompatActivity {
 
         submitExercise = findViewById(R.id.submitExercise);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            exerciseTitleExtra = bundle.getString("title");
+            exerciseInstructionExtra = bundle.getString("instruction");
+            exerciseProblemExtra = bundle.getString("problem");
+            answer1Extra = bundle.getString("answerCode1");
+            answer2Extra = bundle.getString("answerCode2");
+            answer3Extra = bundle.getString("answerCode3");
+
+            exerciseTitle.setText(exerciseTitleExtra);
+            exerciseInstruction.setText(exerciseInstructionExtra);
+            exerciseProblem.setText(exerciseProblemExtra);
+            answer1.setText(answer1Extra);
+            answer2.setText(answer2Extra);
+            answer3.setText(answer3Extra);
+
+            submitExercise.setText("Update Exercise");
+        } else {
+            submitExercise.setText("Add Exercise");
+        }
+
         submitExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (exerciseTitle.getText().toString().isEmpty()) {
-                    exerciseTitle.setError("Please enter exercise title");
-                    return;
-                } if (exerciseInstruction.getText().toString().isEmpty()) {
-                    exerciseInstruction.setError("Please enter exercise instruction");
-                    return;
-                } if (exerciseProblem.getText().toString().isEmpty()) {
-                    exerciseProblem.setError("Please enter exercise problem");
-                    return;
-                } if (answer1.getText().toString().isEmpty()) {
-                    answer1.setError("Please enter correct code 1");
-                    return;
-                } if (answer2.getText().toString().isEmpty()) {
-                    answer2.setError("Please enter correct code 2");
-                    return;
-                } if (answer3.getText().toString().isEmpty()) {
-                    answer3.setError("Please enter correct code 3");
-                    return;
+
+                Bundle bundle1 = getIntent().getExtras();
+
+                if (bundle1 != null) {
+                    String title = exerciseTitle.getText().toString();
+                    String instruction = exerciseInstruction.getText().toString();
+                    String problem = exerciseProblem.getText().toString();
+                    String ans1 = answer1.getText().toString();
+                    String ans2 = answer2.getText().toString();
+                    String ans3 = answer3.getText().toString();
+
+                    updateExercise(title, instruction, problem, ans1, ans2, ans3);
+                } else {
+                    if (exerciseTitle.getText().toString().isEmpty()) {
+                        exerciseTitle.setError("Please enter exercise title");
+                        return;
+                    } if (exerciseInstruction.getText().toString().isEmpty()) {
+                        exerciseInstruction.setError("Please enter exercise instruction");
+                        return;
+                    } if (exerciseProblem.getText().toString().isEmpty()) {
+                        exerciseProblem.setError("Please enter exercise problem");
+                        return;
+                    } if (answer1.getText().toString().isEmpty()) {
+                        answer1.setError("Please enter correct code 1");
+                        return;
+                    } if (answer2.getText().toString().isEmpty()) {
+                        answer2.setError("Please enter correct code 2");
+                        return;
+                    } if (answer3.getText().toString().isEmpty()) {
+                        answer3.setError("Please enter correct code 3");
+                        return;
+                    }
+                    addExercise(exerciseTitle.getText().toString(), exerciseInstruction.getText().toString(), exerciseProblem.getText().toString(), answer1.getText().toString(),
+                            answer2.getText().toString(), answer3.getText().toString());
                 }
-                addExercise(exerciseTitle.getText().toString(), exerciseInstruction.getText().toString(), exerciseProblem.getText().toString(), answer1.getText().toString(),
-                        answer2.getText().toString(), answer3.getText().toString());
             }
         });
     }
@@ -116,6 +152,28 @@ public class ExerciseAddActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 progressDialog.dismiss();
                 Toast.makeText(ExerciseAddActivity.this, "Exercise Added", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ExerciseAddActivity.this, ExerciseActivity.class));
+                finish();
+            }
+        });
+    }
+    private void updateExercise(String title, String instruction, String problem, String answer1, String answer2, String answer3) {
+        progressDialog.show();
+        DocumentReference documentReference = firestore.collection("Quizzes").document(moduleidfromtopicactivity).collection(subidfromtopicactivity).document("Exercise_List");
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("exercise_title", title);
+        data.put("exercise_instruction", instruction);
+        data.put("exercise_problem", problem);
+        data.put("answer1", answer1);
+        data.put("answer2", answer2);
+        data.put("answer3", answer3);
+
+        documentReference.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                progressDialog.dismiss();
+                Toast.makeText(ExerciseAddActivity.this, "Updated Exercise", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ExerciseAddActivity.this, ExerciseActivity.class));
                 finish();
             }
