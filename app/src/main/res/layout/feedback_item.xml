@@ -23,7 +23,7 @@
             android:textSize="16dp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:text="sdasd"
+            android:text="Title"
             android:textColor="#3032D8"/>
 
         <TextView
@@ -34,8 +34,18 @@
             android:textSize="14dp"
             android:textStyle="italic"
             android:gravity="left"
-            android:text="sdasd"
+            android:text="Message"
             android:textColor="#604A4A"/>
+        <TextView
+            android:id="@+id/feedbackUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:gravity="left"
+            android:text="user"
+            android:textColor="#604A4A"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

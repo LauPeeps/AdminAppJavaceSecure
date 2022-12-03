@@ -41,7 +41,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewholder> {
     @Override
     public TopicViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.topic_item, parent, false);
 
         TopicViewholder topicViewholder = new TopicViewholder(itemView);
 
@@ -58,7 +58,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewholder> {
             public void onOneLongClick(View view, int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(topicActivity);
 
-                String[] options = {"Update", "Delete"};
+                String[] options = {"Update"};
 
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
@@ -78,8 +78,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewholder> {
                                 }
                             });
 
-
-                        } if (i == 1) {
 
                         }
 

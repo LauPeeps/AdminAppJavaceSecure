@@ -74,6 +74,7 @@ public class Feedback extends AppCompatActivity {
 
                 for (DocumentSnapshot documentSnapshot: task.getResult()) {
                     FeedbackModel feedbackModel = new FeedbackModel(documentSnapshot.getString("feedback_id"),
+                            documentSnapshot.getString("feedback_user"),
                             documentSnapshot.getString("feedback_title"),
                             documentSnapshot.getString("feedback_message"));
                     feedbackModels.add(feedbackModel);

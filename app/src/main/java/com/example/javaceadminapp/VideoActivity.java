@@ -107,7 +107,6 @@ public class VideoActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     private void addVideoId(String yid) {
@@ -129,5 +128,10 @@ public class VideoActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

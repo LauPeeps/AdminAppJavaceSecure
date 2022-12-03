@@ -34,6 +34,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Viewho
 
         holder.title.setText(feedbackModel.getFeedback_title());
         holder.content.setText(feedbackModel.getFeedback_message());
+        holder.user.setText(feedbackModel.getFeedback_user());
 
     }
 
@@ -43,11 +44,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Viewho
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView title, content;
+        TextView title, content, user;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.feedbackTitle);
             content = itemView.findViewById(R.id.feedbackMessage);
+            user = itemView.findViewById(R.id.feedbackUser);
         }
     }
 }

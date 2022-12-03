@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TopicViewholder extends RecyclerView.ViewHolder {
 
     TextView topicTitle;
-    ImageView deleteBtn;
     View view;
 
     public TopicViewholder(@NonNull View itemView) {
@@ -33,7 +32,6 @@ public class TopicViewholder extends RecyclerView.ViewHolder {
             }
         });
         topicTitle = itemView.findViewById(R.id.catname);
-        deleteBtn = itemView.findViewById(R.id.deletebtn);
 
     }
     private TopicViewholder.ListenerClicker listenerClicker;
