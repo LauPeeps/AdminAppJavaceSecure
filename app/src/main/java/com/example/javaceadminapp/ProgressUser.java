@@ -84,7 +84,6 @@ public class ProgressUser extends AppCompatActivity {
                     progressUserModelList.add(progressUserModel);
                 }
                 progressUserAdapter = new ProgressUserAdapter(ProgressUser.this, progressUserModelList);
-
                 recyclerView.setAdapter(progressUserAdapter);
             }
         });
