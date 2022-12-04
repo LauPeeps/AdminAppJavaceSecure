@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="11dp"
+        app:cardElevation="4dp"
+        >
+
+        <ProgressBar
+            android:id="@+id/userProgressBar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:progress="0"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/progress_indicator_user"
+            android:layout_gravity="left|center_vertical"
+            />
+        <TextView
+            android:id="@+id/moduleName"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="Module"
+            android:layout_gravity="center_horizontal|center_vertical|right"
+            android:layout_marginRight="20dp"
+            android:textSize="18dp"
+            android:gravity="center_vertical|center_horizontal"/>
+        <TextView
+            android:id="@+id/progressPercentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="8dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

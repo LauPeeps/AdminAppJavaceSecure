@@ -193,6 +193,7 @@ public class StudentAddActivity extends AppCompatActivity {
 
                 DocumentReference documentReference = firestore.collection("Users").document(firebaseUser.getUid());
 
+
                 Map<String, Object> student_data = new HashMap<>();
                 student_data.put("uid", uid);
                 student_data.put("username", username);

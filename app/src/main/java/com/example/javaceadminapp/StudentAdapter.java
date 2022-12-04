@@ -47,6 +47,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentViewholder> {
         studentViewholder.setOnClickListener(new StudentViewholder.ListenerClicker() {
             @Override
             public void onOneClick(View view, int position) {
+                Intent intent = new Intent(student, ProgressUser.class);
+                String uid = studentModelList.get(position).getUid();
+                String fullname = studentModelList.get(position).getFullname();
+
+                intent.putExtra("uid", uid);
+                intent.putExtra("fullname", fullname);
+
+                student.startActivity(intent);
 
             }
 
