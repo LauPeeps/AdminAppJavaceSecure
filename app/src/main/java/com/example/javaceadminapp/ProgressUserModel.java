@@ -1,14 +1,18 @@
 package com.example.javaceadminapp;
 
+import com.google.firebase.Timestamp;
+
 public class ProgressUserModel {
 
     String module_id, module_name;
     Long progress;
+    Timestamp timestamp;
 
-    public ProgressUserModel(String module_id, String module_name, Long progress) {
+    public ProgressUserModel(String module_id, String module_name, Long progress, Timestamp timestamp) {
         this.module_id = module_id;
         this.module_name = module_name;
         this.progress = progress;
+        this.timestamp = timestamp;
     }
 
     public String getModule_id() {
@@ -33,5 +37,13 @@ public class ProgressUserModel {
 
     public void setProgress(Long progress) {
         this.progress = progress;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

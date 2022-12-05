@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class ProgressUser extends AppCompatActivity {
     private void fetchUserProgress() {
         progressDialog.show();
 
-        firestore.collection("Users").document(userId).collection(userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("Users").document(userId).collection(userId).orderBy("module_created", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 progressUserModelList.clear();
@@ -80,7 +81,8 @@ public class ProgressUser extends AppCompatActivity {
                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
                     ProgressUserModel progressUserModel = new ProgressUserModel(documentSnapshot.getString("module_id"),
                             documentSnapshot.getString("module_name"),
-                            documentSnapshot.getLong("progress"));
+                            documentSnapshot.getLong("progress"),
+                            documentSnapshot.getTimestamp("module_created"));
                     progressUserModelList.add(progressUserModel);
                 }
                 progressUserAdapter = new ProgressUserAdapter(ProgressUser.this, progressUserModelList);
