@@ -4,11 +4,11 @@
     android:layout_height="200dp"
     android:maxHeight="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#E8C0E0"
+    app:cardBackgroundColor="#E8E5E7"
     android:layout_margin="10dp"
     android:layout_gravity="top|center"
     app:cardCornerRadius="12dp"
-    app:cardElevation="21dp">
+    app:cardElevation="14dp">
 
 
     <RelativeLayout
@@ -36,6 +36,16 @@
             android:gravity="left"
             android:text="Message"
             android:textColor="#604A4A"/>
+        <TextView
+            android:id="@+id/feedbackCreated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:gravity="left"
+            android:text="time"
+            android:textColor="#604A4A"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
         <TextView
             android:id="@+id/feedbackUser"
             android:layout_width="wrap_content"
