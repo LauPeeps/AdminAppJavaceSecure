@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProgressUserViewholder extends RecyclerView.ViewHolder {
 
     TextView moduleName, progressPercentText;
-    ProgressBar userProgressBar;
     View view;
 
     public ProgressUserViewholder(@NonNull View itemView) {
@@ -35,7 +34,6 @@ public class ProgressUserViewholder extends RecyclerView.ViewHolder {
 
         moduleName = itemView.findViewById(R.id.moduleName);
         progressPercentText = itemView.findViewById(R.id.progressPercentText);
-        userProgressBar = itemView.findViewById(R.id.userProgressBar);
 
     }
     private ProgressUserViewholder.ListenerClicker listenerClicker;

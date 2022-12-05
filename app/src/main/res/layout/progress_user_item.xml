@@ -12,15 +12,44 @@
         app:cardElevation="4dp"
         >
 
-        <ProgressBar
-            android:id="@+id/userProgressBar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:progress="0"
-            android:indeterminateOnly="false"
-            android:progressDrawable="@drawable/progress_indicator_user"
-            android:layout_gravity="left|center_vertical"
-            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            >
+            <TextView
+                android:id="@+id/outsideCirc"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/progress_circle_outside"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/insideCirc"
+                android:layout_alignEnd="@id/outsideCirc"
+                android:layout_alignStart="@id/outsideCirc"
+                android:layout_alignBottom="@id/outsideCirc"
+                android:layout_alignTop="@id/outsideCirc"
+                android:layout_margin="6dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/progress_circle_inside"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:layout_alignEnd="@id/insideCirc"
+                android:layout_alignStart="@id/insideCirc"
+                android:layout_alignBottom="@id/insideCirc"
+                android:layout_alignTop="@id/insideCirc"
+                android:id="@+id/progressPercentText"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="0%"
+
+                />
+        </RelativeLayout>
         <TextView
             android:id="@+id/moduleName"
             android:layout_width="150dp"
@@ -30,15 +59,6 @@
             android:layout_marginRight="20dp"
             android:textSize="18dp"
             android:gravity="center_vertical|center_horizontal"/>
-        <TextView
-            android:id="@+id/progressPercentText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0%"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="8dp"
-            />
 
     </androidx.cardview.widget.CardView>
 

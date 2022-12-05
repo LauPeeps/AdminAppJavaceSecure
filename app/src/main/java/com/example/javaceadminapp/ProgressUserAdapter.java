@@ -67,7 +67,6 @@ public class ProgressUserAdapter extends RecyclerView.Adapter<ProgressUserViewho
 
         holder.moduleName.setText(progressUserModelList.get(position).getModule_name());
         holder.progressPercentText.setText(String.valueOf(value) + "%");
-        holder.userProgressBar.setProgress(Math.toIntExact(value));
 
     }
 
