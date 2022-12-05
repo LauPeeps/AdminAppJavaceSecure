@@ -7,12 +7,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -20,15 +26,18 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Leaderboard extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<LeaderboardModel> modelLeaderboardArrayList;
-    LeaderboardAdapter adapterLeaderboard;
-    FirebaseFirestore firestore;
     ProgressDialog progressDialog;
+
+    List<LeaderboardModel> leaderboardModelList = new ArrayList<>();
+    RecyclerView.LayoutManager layoutManager;
+    FirebaseFirestore firestore;
+    LeaderboardAdapter leaderboardAdapter;
 
 
     @Override
@@ -45,16 +54,12 @@ public class Leaderboard extends AppCompatActivity {
         progressDialog.setMessage("Fetching leaderboards data...");
         progressDialog.setCanceledOnTouchOutside(false);
 
+        firestore = FirebaseFirestore.getInstance();
+
         recyclerView = findViewById(R.id.leaderboardRecycle);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        firestore = FirebaseFirestore.getInstance();
-        modelLeaderboardArrayList = new ArrayList<LeaderboardModel>();
-        adapterLeaderboard = new LeaderboardAdapter(Leaderboard.this, modelLeaderboardArrayList);
-
-        recyclerView.setAdapter(adapterLeaderboard);
-
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 
         fetchLeaderboard();
@@ -71,27 +76,21 @@ public class Leaderboard extends AppCompatActivity {
 
     private void fetchLeaderboard() {
         progressDialog.show();
-        firestore.collection("Users").orderBy("score", Query.Direction.DESCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        modelLeaderboardArrayList.clear();
-                        if (error != null) {
-                            if (progressDialog.isShowing())
-                                progressDialog.dismiss();
-                            Toast.makeText(Leaderboard.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        for (DocumentChange documentChange : value.getDocumentChanges()) {
-                            if (documentChange.getType() == DocumentChange.Type.ADDED || documentChange.getType() == DocumentChange.Type.MODIFIED) {
-                                modelLeaderboardArrayList.add(documentChange.getDocument().toObject(LeaderboardModel.class));
-                            }
-                            adapterLeaderboard.notifyDataSetChanged();
-                            if (progressDialog.isShowing())
-                                progressDialog.dismiss();
-                        }
-                    }
-                });
+        firestore.collection("Users").orderBy("score", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                leaderboardModelList.clear();
+                progressDialog.dismiss();
+                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                    LeaderboardModel leaderboardModel = new LeaderboardModel(documentSnapshot.getString("username"),
+                            documentSnapshot.getString("score"));
+                    leaderboardModelList.add(leaderboardModel);
+                }
+                leaderboardAdapter = new LeaderboardAdapter(Leaderboard.this, leaderboardModelList);
+
+                recyclerView.setAdapter(leaderboardAdapter);
+            }
+        });
     }
 
 
