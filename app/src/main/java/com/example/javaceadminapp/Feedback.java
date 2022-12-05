@@ -66,7 +66,7 @@ public class Feedback extends AppCompatActivity {
 
     private void fetchLeaderboard() {
         progressDialog.show();
-        firestore.collection("Feedbacks").orderBy("feedback_created").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("Feedbacks").orderBy("feedback_created", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 feedbackModels.clear();
